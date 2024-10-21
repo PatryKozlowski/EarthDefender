@@ -18,5 +18,20 @@ enum class GameState
 {
     MENU,
     PLAYING,
+    GAME_OVER,
     EXIT
 };
+
+struct GameConfig
+{
+    const float GAME_TIME = 11.0f;
+};
+
+inline GameConfig g_GameConfig;
+
+struct GameAssets
+{
+    const std::string FONT = "/Users/patrykkozlowski/Desktop/Projekty/EarthDefender/assets/font.ttf";
+};
+
+inline GameAssets g_GameAssets;

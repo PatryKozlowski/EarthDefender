@@ -3,7 +3,10 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "GameConfig.hpp"
-#include "Menu.hpp"
+#include "ui/MainMenuHUD.hpp"
+#include "ui/GameOverHUD.hpp"
+#include "Timer.hpp"
+#include "Game.hpp"
 
 class Application
 {
@@ -18,5 +21,7 @@ private:
     sf::Clock m_Clock;
     float m_TargetFps;
     GameState m_CurrentGameState;
-    std::unique_ptr<Menu> m_Menu;
+    MainMenuHUD m_MainMenuHUD;
+    GameOverHUD m_GameOverHUD;
+    Game m_Game;
 };

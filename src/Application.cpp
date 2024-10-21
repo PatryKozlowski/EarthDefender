@@ -3,9 +3,12 @@
 #include <iostream>
 
 Application::Application(unsigned int width, unsigned int height, const std::string &title, sf::Uint32 style, float fps)
-    : m_Window(sf::VideoMode(width, height), title, style), m_TargetFps(fps), m_CurrentGameState(GameState::MENU)
+    : m_Window(sf::VideoMode(width, height), title, style), m_TargetFps(fps),
+      m_CurrentGameState(GameState::MENU),
+      m_MainMenuHUD(m_Window),
+      m_GameOverHUD(m_Window),
+      m_Game(g_GameConfig.GAME_TIME, m_Window)
 {
-    m_Menu = std::make_unique<Menu>(m_Window);
 }
 
 void Application::Run()
@@ -28,17 +31,14 @@ void Application::Run()
 
             if (m_CurrentGameState == GameState::MENU)
             {
-                bool startGame = false;
-                bool exitGame = false;
+                m_MainMenuHUD.HandleInput(event);
 
-                m_Menu->HandleInput(event, startGame, exitGame);
-
-                if (startGame)
+                if (m_MainMenuHUD.IsStartGame())
                 {
                     m_CurrentGameState = GameState::PLAYING;
                 }
 
-                else if (exitGame)
+                else if (m_MainMenuHUD.IsExitGame())
                 {
                     m_CurrentGameState = GameState::EXIT;
                     m_Window.close();
@@ -55,14 +55,33 @@ void Application::Run()
 
             m_Window.clear();
 
+            if (m_CurrentGameState == GameState::GAME_OVER)
+            {
+                m_GameOverHUD.Draw();
+                m_GameOverHUD.HandleInput(event);
+
+                if (m_GameOverHUD.IsRestartGame())
+                {
+                    m_CurrentGameState = GameState::PLAYING;
+                    m_Game.StartGame(timeStep);
+                }
+
+                else if (m_GameOverHUD.IsExitGame())
+                {
+                    m_CurrentGameState = GameState::EXIT;
+                    m_Window.close();
+                }
+            }
+
             if (m_CurrentGameState == GameState::MENU)
             {
-                m_Menu->Draw();
+                m_MainMenuHUD.Draw();
             }
 
             else if (m_CurrentGameState == GameState::PLAYING)
             {
-                std::cout << "Playing game" << std::endl;
+                m_Game.StartGame(timeStep);
+                m_CurrentGameState = m_Game.GetCurrentGameState();
             }
 
             m_Window.display();
