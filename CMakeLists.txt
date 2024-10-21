@@ -32,6 +32,17 @@ FetchContent_MakeAvailable(${SFML_LIB_NAME})
 
 add_executable(${PROJECT_NAME} 
     ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/GameConfig.hpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Application.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Application.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Menu.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Menu.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/AssetManager.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/AssetManager.cpp
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
