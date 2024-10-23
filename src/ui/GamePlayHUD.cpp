@@ -1,39 +1,26 @@
 #include "ui/GamePlayHUD.hpp"
 
-#include <iostream>
-
 GamePlayHUD::GamePlayHUD(sf::RenderWindow &window)
-    : Hud(window)
+    : m_Window(window),
+      m_TimeText(std::make_unique<Text>())
 {
     InitTimeText();
 }
 
-void GamePlayHUD::SetTime(float &time)
+void GamePlayHUD::SetTime(const float &time)
 {
     m_Time = static_cast<int>(time);
-    m_TimeText.setString(std::to_string(m_Time));
+    m_TimeText->SetText(std::to_string(m_Time));
 }
 
-void GamePlayHUD::InitTimeText()
+void GamePlayHUD::InitTimeText() const
 {
-    m_TimeText.setFont(m_Font);
-    m_TimeText.setCharacterSize(36);
-    m_TimeText.setFillColor(sf::Color::White);
-    m_TimeText.setPosition(m_Window.getSize().x / 2 - m_TimeText.getGlobalBounds().width / 2, 0.0f);
+    m_TimeText->SetSize(36);
+    m_TimeText->SetColor(sf::Color::White);
+    m_TimeText->SetPosition(sf::Vector2f(m_Window.getSize().x / 2 - m_TimeText->GetBound().width / 2, 0.0f));
 }
 
-void GamePlayHUD::Draw()
+void GamePlayHUD::Draw() const
 {
-    m_Window.draw(m_TimeText);
-}
-
-void GamePlayHUD::HandleInput(const sf::Event &event)
-{
-    if (event.type == sf::Event::KeyPressed)
-    {
-        if (event.key.code == sf::Keyboard::Escape)
-        {
-            std::cout << "Escape key pressed" << std::endl;
-        }
-    }
+    m_TimeText->Draw(m_Window);
 }

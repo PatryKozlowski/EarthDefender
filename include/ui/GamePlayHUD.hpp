@@ -1,22 +1,20 @@
 #pragma once
 
-#include "ui/Hud.hpp"
+#include <SFML/Graphics.hpp>
+#include "Text.hpp"
 
-#include <SFML/Graphics/Text.hpp>
-
-class GamePlayHUD : public Hud
+class GamePlayHUD
 {
 public:
     GamePlayHUD(sf::RenderWindow &window);
-    virtual ~GamePlayHUD() = default;
 
-    void Draw() override;
-    void HandleInput(const sf::Event &event) override;
-    void SetTime(float &ime);
+    void Draw() const;
+    void SetTime(const float &ime);
 
 private:
-    int m_Time;
-    sf::Text m_TimeText;
+    int m_Time{};
+    sf::RenderWindow &m_Window;
+    std::unique_ptr<Text> m_TimeText;
 
-    void InitTimeText();
+    void InitTimeText() const;
 };

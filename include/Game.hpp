@@ -7,11 +7,10 @@
 class Game
 {
 public:
-    Game(float gameTime, sf::RenderWindow &window);
-    void StartGame(float deltaTime);
-    // void Update(float deltaTime);
-    // void Render();
+    Game(sf::RenderWindow &window);
+    void StartGame(const float &deltaTime);
     GameState GetCurrentGameState() const;
+    void RestartGame();
 
 private:
     Timer m_Timer;

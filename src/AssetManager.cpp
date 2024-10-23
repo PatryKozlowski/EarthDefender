@@ -8,7 +8,7 @@ AssetManager &AssetManager::GetInstance()
 
 const sf::Texture &AssetManager::LoadTexture(const std::string &pathName)
 {
-    auto it = m_Textures.find(pathName);
+    const auto it = m_Textures.find(pathName);
 
     if (it != m_Textures.end())
     {
@@ -29,7 +29,7 @@ const sf::Texture &AssetManager::LoadTexture(const std::string &pathName)
 
 const sf::Texture &AssetManager::GetTexture(const std::string &pathName) const
 {
-    auto it = m_Textures.find(pathName);
+    const auto it = m_Textures.find(pathName);
 
     if (it == m_Textures.end())
     {
@@ -41,7 +41,7 @@ const sf::Texture &AssetManager::GetTexture(const std::string &pathName) const
 
 const sf::Font &AssetManager::LoadFont(const std::string &pathName)
 {
-    auto it = m_Fonts.find(pathName);
+    const auto it = m_Fonts.find(pathName);
 
     if (it != m_Fonts.end())
     {
@@ -62,7 +62,7 @@ const sf::Font &AssetManager::LoadFont(const std::string &pathName)
 
 const sf::Font &AssetManager::GetFont(const std::string &pathName) const
 {
-    auto it = m_Fonts.find(pathName);
+    const auto it = m_Fonts.find(pathName);
 
     if (it == m_Fonts.end())
     {
@@ -71,14 +71,3 @@ const sf::Font &AssetManager::GetFont(const std::string &pathName) const
 
     return *it->second;
 }
-
-// const sf::Sprite &AssetManager::GetSpriteFromSheet(const std::string &pathName, const sf::IntRect rect) const
-// {
-//     const sf::Texture &texture = GetTexture(pathName);
-//     sf::Sprite sprite;
-
-//     sprite.setTexture(texture);
-//     sprite.setTextureRect(rect);
-
-//     return sprite;
-// }

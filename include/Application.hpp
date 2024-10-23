@@ -1,12 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <memory>
 #include "GameConfig.hpp"
 #include "ui/MainMenuHUD.hpp"
-#include "ui/GameOverHUD.hpp"
-#include "Timer.hpp"
 #include "Game.hpp"
+#include "ui/EndGameHUD.hpp"
 
 class Application
 {
@@ -22,6 +20,9 @@ private:
     float m_TargetFps;
     GameState m_CurrentGameState;
     MainMenuHUD m_MainMenuHUD;
-    GameOverHUD m_GameOverHUD;
+    EndGameHUD m_EndGameHUD;
     Game m_Game;
+
+    void HandleGameStateInput(const sf::Event &event);
+    void UpdateGameStates(const float &deltaTime);
 };

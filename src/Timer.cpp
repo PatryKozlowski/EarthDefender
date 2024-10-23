@@ -1,6 +1,6 @@
 #include "Timer.hpp"
 
-Timer::Timer(float duration)
+Timer::Timer(const float &duration)
     : m_ElapsedTime(0.0f), m_Duration(duration), m_IsActive(false)
 {
 }
@@ -15,7 +15,7 @@ void Timer::Stop()
     m_IsActive = false;
 }
 
-bool Timer::IsExpired()
+bool Timer::IsExpired() const
 {
     return m_ElapsedTime >= m_Duration;
 }
@@ -25,7 +25,7 @@ void Timer::Reset()
     m_ElapsedTime = 0.0f;
 }
 
-void Timer::Update(float deltaTime)
+void Timer::Update(const float &deltaTime)
 {
     if (m_IsActive)
     {
@@ -36,4 +36,9 @@ void Timer::Update(float deltaTime)
 float Timer::GetElapsedTime() const
 {
     return m_ElapsedTime;
+}
+
+bool Timer::IsActive() const
+{
+    return m_IsActive;
 }

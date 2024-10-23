@@ -1,25 +1,38 @@
 #include "Game.hpp"
+#include "GameConfig.hpp"
 
-#include <iostream>
-
-Game::Game(float gameTime, sf::RenderWindow &window)
-    : m_Timer(gameTime), m_GamePlayHUD(window)
+Game::Game(sf::RenderWindow &window)
+    : m_Timer(g_GameConfig.GAME_TIME), m_GamePlayHUD(window)
 {
 }
 
-void Game::StartGame(float deltaTime)
+void Game::StartGame(const float &deltaTime)
 {
     m_GamePlayHUD.Draw();
-    m_Timer.Start();
-    float leftTime = g_GameConfig.GAME_TIME - m_Timer.GetElapsedTime();
+
+    if (!m_Timer.IsActive())
+    {
+        m_Timer.Start();
+    }
+
+    const float leftTime = g_GameConfig.GAME_TIME - m_Timer.GetElapsedTime();
+
     m_GamePlayHUD.SetTime(leftTime);
+
     m_Timer.Update(deltaTime);
 
     if (m_Timer.IsExpired())
     {
         m_Timer.Stop();
-        m_CurrentGameState = GameState::GAME_OVER;
+        m_CurrentGameState = GameState::END_GAME;
     }
+}
+
+void Game::RestartGame()
+{
+    m_Timer.Reset();
+
+    m_CurrentGameState = GameState::PLAYING;
 }
 
 GameState Game::GetCurrentGameState() const
