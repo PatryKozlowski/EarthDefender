@@ -2,8 +2,8 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "GameConfig.hpp"
 #include "ui/Text.hpp"
+#include "GameConfig.hpp"
 
 class MenuHUD
 {
@@ -25,5 +25,4 @@ protected:
     sf::RenderWindow &m_Window;
     std::unique_ptr<Text> m_Title;
     std::vector<MenuOption> m_Options;
-    MenuConfig m_Config;
 };

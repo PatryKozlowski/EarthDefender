@@ -1,12 +1,13 @@
 #include "Application.hpp"
 
-Application::Application(const unsigned int width, const unsigned int height, const std::string &title, const sf::Uint32 style, const float fps)
-    : m_Window(sf::VideoMode(width, height), title, style), m_TargetFps(fps),
+Application::Application(const unsigned int width, const unsigned int height, const std::string &title, const sf::Uint32 style)
+    : m_Window(sf::VideoMode(width, height), title, style),
+      m_TargetFps(WindowConfig::TARGET_FPS),
       m_CurrentGameState(GameState::MENU),
       m_MainMenuHUD(m_Window),
-      m_EndGameHUD(m_Window),
-      m_Game(m_Window)
+      m_EndGameHUD(m_Window)
 {
+    m_Game = std::make_unique<Game>(m_Window);
 }
 
 void Application::Run()
@@ -55,7 +56,7 @@ void Application::HandleGameStateInput(const sf::Event &event)
 
         if (m_MainMenuHUD.IsStartGame())
         {
-            m_CurrentGameState = m_Game.GetCurrentGameState();
+            m_CurrentGameState = m_Game->GetCurrentGameState();
         }
 
         else if (m_MainMenuHUD.IsExitGame())
@@ -70,8 +71,8 @@ void Application::HandleGameStateInput(const sf::Event &event)
 
         if (m_EndGameHUD.IsRestartGame())
         {
-            m_Game.RestartGame();
-            m_CurrentGameState = m_Game.GetCurrentGameState();
+            m_Game->RestartGame();
+            m_CurrentGameState = m_Game->GetCurrentGameState();
             m_EndGameHUD.ResetFlags();
         }
         else if (m_EndGameHUD.IsExitGame())
@@ -86,7 +87,7 @@ void Application::HandleGameStateInput(const sf::Event &event)
     }
 }
 
-void Application::UpdateGameStates(const float &deltaTime)
+void Application::UpdateGameStates(float deltaTime)
 {
     switch (m_CurrentGameState)
     {
@@ -95,8 +96,8 @@ void Application::UpdateGameStates(const float &deltaTime)
         break;
 
     case GameState::PLAYING:
-        m_Game.StartGame(deltaTime);
-        if (m_Game.GetCurrentGameState() == GameState::END_GAME)
+        m_Game->StartGame(deltaTime);
+        if (m_Game->GetCurrentGameState() == GameState::END_GAME)
         {
             m_CurrentGameState = GameState::END_GAME;
         }

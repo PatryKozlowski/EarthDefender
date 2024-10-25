@@ -9,9 +9,9 @@ Text::Text()
 
 void Text::LoadFont()
 {
-    AssetManager::GetInstance().LoadFont(g_GameAssets.FONT);
+    AssetManager::GetInstance().LoadFont(GameAssets::FONT);
 
-    const sf::Font &font = AssetManager::GetInstance().GetFont(g_GameAssets.FONT);
+    const sf::Font &font = AssetManager::GetInstance().GetFont(GameAssets::FONT);
 
     m_Text.setFont(font);
 }

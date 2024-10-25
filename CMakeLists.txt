@@ -4,13 +4,13 @@ project(EarthDefender
     LANGUAGES C CXX
 )
 
-if (WIN32)
-    set(CMAKE_CXX_FLAGS_DEBUG "/Od /Zi /Wall /WX /EHsc")
-    set(CMAKE_CXX_FLAGS_RELEASE "/O2 /Wall /WX /EHsc")
-else()
+# if (WIN32)
+#     set(CMAKE_CXX_FLAGS_DEBUG "/Od /Zi /Wall /WX /EHsc")
+#     set(CMAKE_CXX_FLAGS_RELEASE "/O2 /Wall /WX /EHsc")
+# else()
     set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -Wall -Wextra -Wpedantic -Wconversion -Werror -fno-omit-frame-pointer")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Wextra -Wpedantic -Wconversion -Werror -march=native -flto")
-endif()
+# endif()
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -39,11 +39,12 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/GameConfig.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/GameConfig.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Application.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Application.cpp
 
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Text.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Text.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Text.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/MenuHUD.hpp
@@ -66,6 +67,21 @@ add_executable(${PROJECT_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Game.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Game.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Object.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Object.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Earth.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Earth.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Heart.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Heart.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/GameTime.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/GameTime.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Coin.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Coin.cpp
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC

@@ -1,4 +1,5 @@
 #include "ui/EndGameHUD.hpp"
+#include "GameConfig.hpp"
 
 EndGameHUD::EndGameHUD(sf::RenderWindow &window)
     : MenuHUD(window)
@@ -28,26 +29,26 @@ void EndGameHUD::ResetFlags()
 }
 void EndGameHUD::InitEndGameHUD()
 {
-    InitOptions({m_Config.PLAY_AGAIN, m_Config.EXIT});
+    InitOptions({MenuConfig::PLAY_AGAIN, MenuConfig::EXIT});
 }
 
 void EndGameHUD::DrawMenuTitle(sf::RenderWindow &window)
 {
-    m_Title->SetText(m_Config.TITLE_END_GAME);
-    m_Title->SetSize(m_Config.TITLE_SIZE);
-    m_Title->SetColor(m_Config.TITLE_COLOR);
-    m_Title->SetPosition(sf::Vector2f(window.getSize().x / 2 - m_Title->GetBound().width / 2, m_Config.TITLE_Y));
+    m_Title->SetText(MenuConfig::TITLE_END_GAME);
+    m_Title->SetSize(MenuConfig::TITLE_SIZE);
+    m_Title->SetColor(MenuConfig::TITLE_COLOR);
+    m_Title->SetPosition(sf::Vector2f(window.getSize().x / 2 - m_Title->GetBound().width / 2, MenuConfig::TITLE_Y));
     m_Title->Draw(window);
 }
 
 void EndGameHUD::OnOptionClick(const std::string &label)
 {
-    if (label == m_Config.PLAY_AGAIN)
+    if (label == MenuConfig::PLAY_AGAIN)
     {
         m_RestartGame = true;
     }
 
-    if (label == m_Config.EXIT)
+    if (label == MenuConfig::EXIT)
     {
         m_ExitGame = true;
     }

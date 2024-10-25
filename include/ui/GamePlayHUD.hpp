@@ -1,7 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Text.hpp"
+#include "Heart.hpp"
+#include <vector>
+#include "GameTime.hpp"
+#include "Coin.hpp"
 
 class GamePlayHUD
 {
@@ -10,11 +13,14 @@ public:
 
     void Draw() const;
     void SetTime(const float &ime);
+    void SetScore(const unsigned int score);
+    void UpdateHearts(unsigned int playerLives);
 
 private:
-    int m_Time{};
     sf::RenderWindow &m_Window;
-    std::unique_ptr<Text> m_TimeText;
+    std::vector<Heart> m_Hearts;
+    GameTime m_GameTime;
+    Coin m_Coin;
 
-    void InitTimeText() const;
+    void InitHeart();
 };

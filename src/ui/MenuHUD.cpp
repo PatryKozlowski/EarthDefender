@@ -1,5 +1,7 @@
 #include "ui/MenuHUD.hpp"
 #include "AssetManager.hpp"
+#include "GameConfig.hpp"
+#include <iostream>
 
 MenuHUD::MenuHUD(sf::RenderWindow &window)
     : m_Window(window), m_Title(std::make_unique<Text>())
@@ -25,11 +27,11 @@ void MenuHUD::HandleMouseMove(float x, float y) const
     {
         if (option.text->GetBound().contains(x, y))
         {
-            option.text->SetColor(m_Config.OPTION_HIGHLIGHT_COLOR);
+            option.text->SetColor(MenuConfig::OPTION_HIGHLIGHT_COLOR);
         }
         else
         {
-            option.text->SetColor(m_Config.OPTION_COLOR);
+            option.text->SetColor(MenuConfig::OPTION_COLOR);
         }
     }
 }
@@ -62,7 +64,7 @@ void MenuHUD::Draw()
 
 void MenuHUD::InitOptions(const std::vector<std::string> &options)
 {
-    float yOffset = m_Config.OPTION_Y;
+    float yOffset = MenuConfig::OPTION_Y;
 
     for (const auto &label : options)
     {
@@ -70,19 +72,19 @@ void MenuHUD::InitOptions(const std::vector<std::string> &options)
 
         auto &option = m_Options.back();
         option.text->SetText(option.label);
-        option.text->SetSize(m_Config.OPTION_SIZE);
-        option.text->SetColor(m_Config.OPTION_COLOR);
+        option.text->SetSize(MenuConfig::OPTION_SIZE);
+        option.text->SetColor(MenuConfig::OPTION_COLOR);
         option.text->SetPosition(sf::Vector2f(m_Window.getSize().x / 2 - option.text->GetBound().width / 2, yOffset));
-        yOffset += m_Config.OPTION_Y_OFFSET;
+        yOffset += MenuConfig::OPTION_Y_OFFSET;
     }
 }
 
 void MenuHUD::DrawMenuTitle(sf::RenderWindow &window)
 {
-    m_Title->SetText(m_Config.TITLE);
-    m_Title->SetSize(m_Config.TITLE_SIZE);
-    m_Title->SetColor(m_Config.TITLE_COLOR);
-    m_Title->SetPosition(sf::Vector2f(window.getSize().x / 2 - m_Title->GetBound().width / 2, m_Config.TITLE_Y));
+    m_Title->SetText(MenuConfig::TITLE);
+    m_Title->SetSize(MenuConfig::TITLE_SIZE);
+    m_Title->SetColor(MenuConfig::TITLE_COLOR);
+    m_Title->SetPosition(sf::Vector2f(window.getSize().x / 2 - m_Title->GetBound().width / 2, MenuConfig::TITLE_Y));
     m_Title->Draw(window);
 }
 

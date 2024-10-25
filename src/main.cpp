@@ -3,7 +3,7 @@
 
 int main()
 {
-    Application *app = new Application(g_WindowConfig.WIDTH, g_WindowConfig.HEIGHT, g_WindowConfig.TITLE, g_WindowConfig.STYLE, g_WindowConfig.TARGET_FPS);
+    Application *app = new Application(WindowConfig::WIDTH, WindowConfig::HEIGHT, WindowConfig::TITLE, WindowConfig::STYLE);
 
     app->Run();
 

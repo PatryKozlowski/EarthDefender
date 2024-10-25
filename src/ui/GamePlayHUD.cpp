@@ -1,26 +1,58 @@
 #include "ui/GamePlayHUD.hpp"
+#include "GameConfig.hpp"
+#include "AssetManager.hpp"
+#include <iostream>
 
 GamePlayHUD::GamePlayHUD(sf::RenderWindow &window)
-    : m_Window(window),
-      m_TimeText(std::make_unique<Text>())
+    : m_Window(window)
 {
-    InitTimeText();
+    InitHeart();
 }
 
 void GamePlayHUD::SetTime(const float &time)
 {
-    m_Time = static_cast<int>(time);
-    m_TimeText->SetText(std::to_string(m_Time));
+    m_GameTime.ShowTime(static_cast<unsigned int>(time));
 }
 
-void GamePlayHUD::InitTimeText() const
+void GamePlayHUD::SetScore(const unsigned int score)
 {
-    m_TimeText->SetSize(36);
-    m_TimeText->SetColor(sf::Color::White);
-    m_TimeText->SetPosition(sf::Vector2f(m_Window.getSize().x / 2 - m_TimeText->GetBound().width / 2, 0.0f));
+    m_Coin.ShowScore(score);
+}
+
+void GamePlayHUD::UpdateHearts(unsigned int playerLives)
+{
+    m_Hearts.clear();
+
+    for (unsigned int i = 0; i < playerLives; ++i)
+    {
+        m_Hearts.emplace_back(AssetSettings::HEART::X_OFFSET + i * 40, 10);
+    }
+
+    for (const auto &heart : m_Hearts)
+    {
+        heart.Draw(m_Window);
+    }
+}
+
+void GamePlayHUD::InitHeart()
+{
+    for (unsigned int i = 0; i < GameConfig::INIT_PLAYER_LIFE; i++)
+    {
+        m_Hearts.emplace_back(AssetSettings::HEART::X_OFFSET + i * AssetSettings::HEART::SPACE_BETWEEN, AssetSettings::HEART::Y_OFFSET);
+    }
 }
 
 void GamePlayHUD::Draw() const
 {
-    m_TimeText->Draw(m_Window);
+    sf::RectangleShape background(sf::Vector2f(WindowConfig::WIDTH, GamePlayHUDConfig::BACKGROUND_Y_OFFSET));
+    background.setFillColor(GamePlayHUDConfig::BACKGROUND_COLOR);
+    m_Window.draw(background);
+
+    for (const auto &heart : m_Hearts)
+    {
+        heart.Draw(m_Window);
+    }
+
+    m_GameTime.Draw(m_Window);
+    m_Coin.Draw(m_Window);
 }
