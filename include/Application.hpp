@@ -8,20 +8,20 @@
 class Application
 {
 public:
-    Application(unsigned int width, unsigned int height, const std::string &title, sf::Uint32 style);
-    ~Application() = default;
+	Application(unsigned int width, unsigned int height, const std::string& title, sf::Uint32 style);
+	~Application() = default;
 
-    void Run();
+	void Run();
 
 private:
-    sf::RenderWindow m_Window;
-    sf::Clock m_Clock;
-    float m_TargetFps;
-    GameState m_CurrentGameState;
-    MainMenuHUD m_MainMenuHUD;
-    EndGameHUD m_EndGameHUD;
-    std::unique_ptr<Game> m_Game;
+	sf::RenderWindow m_Window;
+	sf::Clock m_Clock;
+	float m_TargetFps;
+	GameState m_CurrentGameState;
+	MainMenuHUD m_MainMenuHUD;
+	EndGameHUD m_EndGameHUD;
+	std::unique_ptr<Game> m_Game;
 
-    void HandleGameStateInput(const sf::Event &event);
-    void UpdateGameStates(float deltaTime);
+	void HandleGameStateInput(const sf::Event& event);
+	void UpdateGameStates();
 };

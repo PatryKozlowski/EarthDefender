@@ -4,23 +4,23 @@
 
 Heart::Heart(float x, float y)
 {
-    AssetManager::GetInstance().LoadTexture(AssetSettings::HEART::TEXTURE_PATH);
-    const auto &texture = AssetManager::GetInstance().LoadTexture(AssetSettings::HEART::TEXTURE_PATH);
+	AssetManager::GetInstance().LoadTexture(AssetSettings::HEART::TEXTURE_PATH);
+	const auto& texture = AssetManager::GetInstance().LoadTexture(AssetSettings::HEART::TEXTURE_PATH);
 
-    SetObjectTexture(texture);
-    sf::Vector2u windowSize = sf::Vector2u(WindowConfig::WIDTH, WindowConfig::HEIGHT);
+	SetObjectTexture(texture);
+	sf::Vector2u windowSize = sf::Vector2u(WindowConfig::WIDTH, WindowConfig::HEIGHT);
 
-    SetObjectPosition(x, y);
+	SetObjectPosition(x, y);
 
-    SetObjectScale(AssetSettings::HEART::SCALE, AssetSettings::HEART::SCALE);
+	SetObjectScale(AssetSettings::HEART::SCALE, AssetSettings::HEART::SCALE);
 }
 
-void Heart::Draw(sf::RenderWindow &window) const
+void Heart::Draw(sf::RenderWindow& window) const
 {
-    Object::Draw(window);
+	Object::Draw(window);
 }
 
-void Heart::Update(const float deltaTime) const
+void Heart::Update(const float deltaTime)
 {
-    Object::Update(deltaTime);
+	Object::Update(deltaTime);
 }

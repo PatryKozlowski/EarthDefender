@@ -9,18 +9,20 @@
 class GamePlayHUD
 {
 public:
-    GamePlayHUD(sf::RenderWindow &window);
+	GamePlayHUD(sf::RenderWindow& window);
 
-    void Draw() const;
-    void SetTime(const float &ime);
-    void SetScore(const unsigned int score);
-    void UpdateHearts(unsigned int playerLives);
+	void Draw() const;
+	void Update(const unsigned int& playersLives, const unsigned int& score, const float& time);
 
 private:
-    sf::RenderWindow &m_Window;
-    std::vector<Heart> m_Hearts;
-    GameTime m_GameTime;
-    Coin m_Coin;
+	sf::RenderWindow& m_Window;
+	std::vector<Heart> m_Hearts;
+	GameTime m_GameTime;
+	Coin m_Coin;
 
-    void InitHeart();
+	void InitHeart();
+	void SetTime(const float& time);
+	void SetScore(const unsigned int& score);
+	void UpdateHearts(const unsigned int& playerLives);
+
 };

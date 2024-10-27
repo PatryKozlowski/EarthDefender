@@ -4,13 +4,11 @@ project(EarthDefender
     LANGUAGES C CXX
 )
 
-# if (WIN32)
-#     set(CMAKE_CXX_FLAGS_DEBUG "/Od /Zi /Wall /WX /EHsc")
-#     set(CMAKE_CXX_FLAGS_RELEASE "/O2 /Wall /WX /EHsc")
-# else()
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    message(STATUS "Building on macOS")
     set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -Wall -Wextra -Wpedantic -Wconversion -Werror -fno-omit-frame-pointer")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Wextra -Wpedantic -Wconversion -Werror -march=native -flto")
-# endif()
+endif()
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -82,6 +80,18 @@ add_executable(${PROJECT_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Coin.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Coin.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/MeteorHealthHUD.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/MeteorHealthHUD.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Explosion.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Explosion.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Meteor.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Meteor.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/MeteorManager.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/MeteorManager.cpp
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC

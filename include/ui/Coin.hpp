@@ -6,12 +6,12 @@
 class Coin : public Object
 {
 public:
-    Coin();
-    void Draw(sf::RenderWindow &window) const override;
-    void ShowScore(const unsigned int score);
+	Coin();
+	void Draw(sf::RenderWindow& window) const override;
+	void ShowScore(const unsigned int score);
 
 private:
-    std::unique_ptr<Text> m_ScoreText;
+	std::unique_ptr<Text> m_ScoreText;
 
-    void InitCoin() const;
+	void InitCoin() const;
 };

@@ -6,6 +6,6 @@ inline const std::string GetResourceDir()
 #ifdef NDEBUG // release build
     return "assets/";
 #else
-    return "/Users/patrykkozlowski/Desktop/Projekty/EarthDefender/assets/";
+    return "C:/Users/Patryk/source/repos/PatryKozlowski/EarthDefender/assets/";
 #endif
 }
