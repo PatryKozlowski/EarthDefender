@@ -7,14 +7,14 @@ const sf::Color GRAY = sf::Color(128, 128, 128);
 
 const std::string GameAssets::FONT = GetResourceDir() + "/font.ttf";
 
-const std::string AssetSettings::EXPLOSION::TEXTURE_PATH = GetResourceDir() + "/explosion.png";
-const std::string AssetSettings::EARTH::TEXTURE_PATH = GetResourceDir() + "/earth.png";
-const std::string AssetSettings::HEART::TEXTURE_PATH = GetResourceDir() + "/heart.png";
-const std::string AssetSettings::TIME_TEXT::TEXTURE_PATH = GetResourceDir() + "/clock.png";
-const std::string AssetSettings::COIN::TEXTURE_PATH = GetResourceDir() + "/coin.png";
-const std::string AssetSettings::METEOR::SMALL::TEXTURE_PATH = GetResourceDir() + "/meteor_small.png";
-const std::string AssetSettings::METEOR::MEDIUM::TEXTURE_PATH = GetResourceDir() + "/meteor_medium.png";
-const std::string AssetSettings::METEOR::LARGE::TEXTURE_PATH = GetResourceDir() + "/meteor_large.png";
+const std::string AssetSettings::EXPLOSION::TEXTURE_PATH = GetResourceDir() + "explosion.png";
+const std::string AssetSettings::EARTH::TEXTURE_PATH = GetResourceDir() + "earth.png";
+const std::string AssetSettings::HEART::TEXTURE_PATH = GetResourceDir() + "heart.png";
+const std::string AssetSettings::TIME_TEXT::TEXTURE_PATH = GetResourceDir() + "clock.png";
+const std::string AssetSettings::COIN::TEXTURE_PATH = GetResourceDir() + "coin.png";
+const std::string AssetSettings::METEOR::SMALL::TEXTURE_PATH = GetResourceDir() + "meteor_small.png";
+const std::string AssetSettings::METEOR::MEDIUM::TEXTURE_PATH = GetResourceDir() + "meteor_medium.png";
+const std::string AssetSettings::METEOR::LARGE::TEXTURE_PATH = GetResourceDir() + "meteor_large.png";
 
 const sf::Color MenuConfig::TITLE_COLOR = WHITE;
 const sf::Color MenuConfig::OPTION_COLOR = WHITE;

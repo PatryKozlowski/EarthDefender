@@ -1,25 +1,22 @@
 #include "ui/Explosion.hpp"
 #include "AssetManager.hpp"
 #include "GameConfig.hpp"
-#include <iostream>
 
-Explosion::Explosion(bool isMeteorExplosion)
-	: m_IsMeteorExplosion(isMeteorExplosion),
+Explosion::Explosion(bool isExplosionByPlayer)
+	: Object(AssetSettings::EXPLOSION::TEXTURE_PATH, AssetSettings::EXPLOSION::SCALE, 0.0f, 0.0f),
+	m_IsExplosionByPlayer{ isExplosionByPlayer },
 	m_IsFinished{ false },
 	m_ElapsedTime{ 0.0f },
-	m_FrameDuration(AssetSettings::EXPLOSION::FRAME_DURATION),
+	m_FrameDuration{ AssetSettings::EXPLOSION::FRAME_DURATION },
 	m_CurrentFrame{ 0 }
 {
-	const sf::Texture& texture = AssetManager::GetInstance().GetTexture(AssetSettings::EXPLOSION::TEXTURE_PATH);
-	m_Sprite.setTexture(texture);
-
-	if (m_IsMeteorExplosion)
+	if (m_IsExplosionByPlayer)
 	{
-		m_Sprite.setTextureRect(sf::IntRect(0, 64, 64, 64));
+		SetObjectTextureRect(AssetSettings::EXPLOSION::DESTROYED::FRAME_START_X, AssetSettings::EXPLOSION::DESTROYED::FRAME_END_Y, AssetSettings::EXPLOSION::FRAME_WIDTH, AssetSettings::EXPLOSION::FRAME_HEIGHT);
 	}
 	else
 	{
-		m_Sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
+		SetObjectTextureRect(AssetSettings::EXPLOSION::COLLISION::FRAME_START_X, AssetSettings::EXPLOSION::COLLISION::FRAME_END_Y, AssetSettings::EXPLOSION::FRAME_WIDTH, AssetSettings::EXPLOSION::FRAME_HEIGHT);
 	}
 }
 
@@ -32,37 +29,21 @@ void Explosion::Update(float deltaTime)
 		m_ElapsedTime = 0.0f;
 		m_CurrentFrame++;
 
-		if (m_IsMeteorExplosion)
+		if (m_CurrentFrame >= AssetSettings::EXPLOSION::FRAME_COUNT)
 		{
-			if (m_CurrentFrame < 3)
-			{
-				int x = m_CurrentFrame * 64;
-				m_Sprite.setTextureRect(sf::IntRect(x, 64, 64, 64));
-			}
-			else
-			{
-				m_IsFinished = true;
-			}
+			m_IsFinished = true;
 		}
-		else {
-			if (m_CurrentFrame < 3)
-			{
-				int x = m_CurrentFrame * 64;
-
-				m_Sprite.setTextureRect(sf::IntRect(x, 0, 64, 64));
-			}
-			else
-			{
-				m_IsFinished = true;
-			}
+		else
+		{
+			UpdateTextureRect();
 		}
 	}
 }
 
-void Explosion::Draw(sf::RenderWindow& window)
-{
 
-	window.draw(m_Sprite);
+void Explosion::Draw(sf::RenderWindow& window) const
+{
+	Object::Draw(window);
 }
 
 bool Explosion::IsFinished() const
@@ -70,7 +51,16 @@ bool Explosion::IsFinished() const
 	return m_IsFinished;
 }
 
-void Explosion::SetPosition(const sf::Vector2f& position)
+void Explosion::UpdateTextureRect()
 {
-	m_Sprite.setPosition(position);
+	int x = m_CurrentFrame * AssetSettings::EXPLOSION::FRAME_WIDTH;
+
+	if (m_IsExplosionByPlayer)
+	{
+		SetObjectTextureRect(x, AssetSettings::EXPLOSION::DESTROYED::FRAME_END_Y, AssetSettings::EXPLOSION::FRAME_WIDTH, AssetSettings::EXPLOSION::FRAME_HEIGHT);
+	}
+	else
+	{
+		SetObjectTextureRect(x, AssetSettings::EXPLOSION::COLLISION::FRAME_END_Y, AssetSettings::EXPLOSION::FRAME_WIDTH, AssetSettings::EXPLOSION::FRAME_HEIGHT);
+	}
 }

@@ -5,18 +5,18 @@
 class Explosion : public Object
 {
 public:
-	Explosion(bool isMeteorExplosion);
+	Explosion(bool isMeteorExplosionByPlayer);
 
-	void Update(float deltaTime);
-	void Draw(sf::RenderWindow& window);
+	void Update(float deltaTime) override;
+	void Draw(sf::RenderWindow& window) const override;
 	bool IsFinished() const;
-	void SetPosition(const sf::Vector2f& position);
 
 private:
-	sf::Sprite m_Sprite;
-	bool m_IsMeteorExplosion;
+	bool m_IsExplosionByPlayer;
 	bool m_IsFinished;
 	float m_ElapsedTime;
 	float m_FrameDuration;
 	int m_CurrentFrame;
+
+	void UpdateTextureRect();
 };

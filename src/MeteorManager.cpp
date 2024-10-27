@@ -1,9 +1,8 @@
 #include "MeteorManager.hpp"
 #include "AssetManager.hpp"
-#include <iostream>
 
 MeteorManager::MeteorManager(sf::RenderWindow& window)
-	: m_Window(window)
+	: m_Window{ window }
 {
 }
 
@@ -16,9 +15,7 @@ void MeteorManager::SpawnMeteor()
 
 	const MeteorData& randomMeteorData = m_MeteorTypes[static_cast<size_t>(rand() % static_cast<int>(m_MeteorTypes.size()))];
 
-	const sf::Texture& meteorTexture = AssetManager::GetInstance().GetTexture(randomMeteorData.texturePath);
-
-	m_Meteors.emplace_back(std::make_unique<Meteor>(meteorTexture, randomMeteorData.speed, randomMeteorData.health, randomMeteorData.damage, randomMeteorData.score));
+	m_Meteors.emplace_back(std::make_unique<Meteor>(randomMeteorData.texturePath, randomMeteorData.speed, randomMeteorData.health, randomMeteorData.damage, randomMeteorData.score));
 }
 
 void MeteorManager::Update(float deltaTime)
@@ -92,8 +89,8 @@ void MeteorManager::ClearMeteors()
 bool MeteorManager::IsCollision(const Meteor& meteor, const Earth& earth)
 {
 	sf::Vector2f earthPosition = earth.GetObjectPosition();
-	float earthRadius = earth.GetRadius();
-	float meteorRadius = meteor.GetRadius();
+	float earthRadius = earth.GetObjectRadius();
+	float meteorRadius = meteor.GetObjectRadius();
 
 	float earthCenterX = earthPosition.x + earthRadius;
 	float earthCenterY = earthPosition.y + earthRadius;

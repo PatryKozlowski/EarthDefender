@@ -1,10 +1,9 @@
 #include "ui/GamePlayHUD.hpp"
 #include "GameConfig.hpp"
 #include "AssetManager.hpp"
-#include <iostream>
 
 GamePlayHUD::GamePlayHUD(sf::RenderWindow& window)
-	: m_Window(window)
+	: m_Window{ window }
 {
 	InitHeart();
 }

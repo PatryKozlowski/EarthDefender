@@ -43,6 +43,20 @@ struct AssetSettings
 		static const std::string TEXTURE_PATH;
 		static constexpr float SCALE = 1.0f;
 		static constexpr float FRAME_DURATION = 0.1f;
+		static constexpr unsigned int FRAME_WIDTH = 64;
+		static constexpr unsigned int FRAME_HEIGHT = 64;
+		static constexpr unsigned int FRAME_COUNT = 3;
+
+		struct DESTROYED
+		{
+			static constexpr unsigned int FRAME_START_X = 0;
+			static constexpr unsigned int FRAME_END_Y = 64;
+		};
+		struct COLLISION
+		{
+			static constexpr unsigned int FRAME_START_X = 0;
+			static constexpr unsigned int FRAME_END_Y = 0;
+		};
 	};
 
 	struct EARTH
@@ -79,7 +93,7 @@ struct AssetSettings
 
 	struct METEOR
 	{
-		static constexpr float SCALE = 0.1f;
+		static constexpr float SCALE = 1.0f;
 		static const std::vector<MeteorData> METEOR_TYPES;
 
 		struct SMALL

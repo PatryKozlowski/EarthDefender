@@ -2,9 +2,8 @@
 
 #include "Text.hpp"
 #include "Heart.hpp"
-#include "Object.hpp"
 
-class MeteorHealthHUD : public Object
+class MeteorHealthHUD
 {
 public:
 	MeteorHealthHUD();

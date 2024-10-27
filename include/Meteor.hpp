@@ -9,10 +9,10 @@
 class Meteor : public Object
 {
 public:
-	Meteor(const sf::Texture& texture, float speed, unsigned int health, unsigned int damage, unsigned int score);
+	Meteor(const std::string& pathNmae, float speed, unsigned int health, unsigned int damage, unsigned int score);
 
-	void Update(float deltaTime);
-	void Draw(sf::RenderWindow& window);
+	void Update(float deltaTime) override;
+	void Draw(sf::RenderWindow& window) const override;
 	void Destroy();
 	void TakeDamage(const unsigned int& damage);
 	void UpdateHealthText(const unsigned int& health);
@@ -20,7 +20,6 @@ public:
 	unsigned int GetHealth() const;
 	unsigned int GetDamage() const;
 	unsigned int GetScore() const;
-	float GetRadius() const;
 	bool IsDestroyed() const;
 	bool IsClicked(const sf::Vector2i& mousePosition) const;
 	bool HasExploded() const;

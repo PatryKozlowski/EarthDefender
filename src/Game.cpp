@@ -4,7 +4,7 @@
 #include <iostream>
 
 Game::Game(sf::RenderWindow& window)
-	: m_Window(window),
+	: m_Window{ window },
 	m_GameTimer{ std::make_unique<Timer>(GameConfig::GAME_TIME) },
 	m_MeteorsSpawnTimer{ std::make_unique<Timer>(GameConfig::METEOR_SPAWN_INTERVAL) },
 	m_CurrentGameState{ GameState::PLAYING },

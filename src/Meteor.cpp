@@ -1,10 +1,10 @@
 #include "Meteor.hpp"
 #include "GameConfig.hpp"
 #include <AssetManager.hpp>
-#include <iostream>
 
-Meteor::Meteor(const sf::Texture& texture, float speed, unsigned int health, unsigned int damage, unsigned int score)
-	:m_Speed{ speed },
+Meteor::Meteor(const std::string& pathName, float speed, unsigned int health, unsigned int damage, unsigned int score)
+	: Object(pathName, AssetSettings::METEOR::SCALE, 0.0f, 0.0f),
+	m_Speed{ speed },
 	m_Health{ health },
 	m_Damage{ damage },
 	m_Score{ score },
@@ -13,13 +13,9 @@ Meteor::Meteor(const sf::Texture& texture, float speed, unsigned int health, uns
 	m_Explosion{ nullptr },
 	m_HasExploded{ false }
 {
-	AssetManager::GetInstance().LoadTexture(AssetSettings::EXPLOSION::TEXTURE_PATH);
-
-	SetObjectTexture(texture);
-
 	SetRandomPosition();
 
-	m_Radius = GetObjectBound().width / 2.0f;
+	m_Radius = GetObjectRadius();
 }
 
 void Meteor::Update(float deltaTime)
@@ -42,7 +38,7 @@ void Meteor::Update(float deltaTime)
 	}
 }
 
-void Meteor::Draw(sf::RenderWindow& window)
+void Meteor::Draw(sf::RenderWindow& window) const
 {
 	if (m_Explosion)
 	{
@@ -86,7 +82,7 @@ void Meteor::Explode(bool isMeteorExplosionByPlayer)
 	if (isMeteorExplosionByPlayer)
 	{
 		m_Explosion = std::make_unique<Explosion>(true);
-		m_Explosion->SetPosition(GetObjectPosition());
+		m_Explosion->SetObjectPosition(GetObjectPosition().x, GetObjectPosition().y);
 	}
 	else
 	{
@@ -96,7 +92,7 @@ void Meteor::Explode(bool isMeteorExplosionByPlayer)
 		sf::Vector2f explosionPosition = GetObjectPosition();
 		explosionPosition.y += offsetY;
 
-		m_Explosion->SetPosition(explosionPosition);
+		m_Explosion->SetObjectPosition(explosionPosition.x, explosionPosition.y);
 	}
 
 	m_HasExploded = true;
@@ -140,11 +136,6 @@ unsigned int Meteor::GetDamage() const
 unsigned int Meteor::GetScore() const
 {
 	return m_Score;
-}
-
-float Meteor::GetRadius() const
-{
-	return m_Radius;
 }
 
 bool Meteor::IsDestroyed() const
