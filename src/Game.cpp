@@ -1,7 +1,5 @@
 #include "Game.hpp"
 #include "GameConfig.hpp"
-#include "AssetManager.hpp"
-#include <iostream>
 
 Game::Game(sf::RenderWindow& window)
 	: m_Window{ window },
@@ -14,17 +12,11 @@ Game::Game(sf::RenderWindow& window)
 	m_PlayerHealth{ GameConfig::INIT_HEALTH },
 	m_PlayerScore{ GameConfig::INIT_SCORE }
 {
-	AssetManager::GetInstance().LoadTexture(AssetSettings::METEOR::SMALL::TEXTURE_PATH);
-	AssetManager::GetInstance().LoadTexture(AssetSettings::METEOR::MEDIUM::TEXTURE_PATH);
-	AssetManager::GetInstance().LoadTexture(AssetSettings::METEOR::LARGE::TEXTURE_PATH);
-
-	m_MeteorManager->SetMeteorTypes(AssetSettings::METEOR::METEOR_TYPES);
 }
 
 void Game::StartGame()
 {
 	DrawGameHUD();
-
 	m_PlayerEarth->Draw(m_Window);
 
 	StartTimers();
@@ -64,7 +56,9 @@ GameState Game::GetCurrentGameState() const
 
 void Game::DrawGameHUD()
 {
-	m_GamePlayHUD->Update(m_PlayerHealth, m_PlayerScore, m_GameTimer->GetLeftTime());
+	m_GamePlayHUD->SetPlayerScore(m_PlayerScore);
+	m_GamePlayHUD->SetPlayerLives(m_PlayerHealth);
+	m_GamePlayHUD->SetGameTime(m_GameTimer->GetLeftTime());
 	m_GamePlayHUD->Draw();
 }
 
@@ -88,11 +82,14 @@ void Game::Update(float deltaTime)
 {
 	m_MeteorManager->Update(deltaTime);
 	m_MeteorsSpawnTimer->Update(deltaTime);
+	m_GamePlayHUD->Update(deltaTime);
 	m_GameTimer->Update(deltaTime);
 }
 
 void Game::UpdateMeteorSpawning()
 {
+	m_MeteorManager->SetMeteorTypes(AssetSettings::METEOR::METEOR_TYPES);
+
 	const bool isMeteorSpawnTimerExpired = m_MeteorsSpawnTimer->IsExpired();
 
 	if (isMeteorSpawnTimerExpired)

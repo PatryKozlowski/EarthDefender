@@ -5,6 +5,6 @@
 class Heart : public Object
 {
 public:
-	Heart(float x, float y);
+	Heart();
 	void Draw(sf::RenderWindow& window) const override;
 };

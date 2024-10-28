@@ -5,7 +5,7 @@ const sf::Color WHITE = sf::Color(255, 255, 255);
 const sf::Color MAGENTA = sf::Color(255, 0, 255);
 const sf::Color GRAY = sf::Color(128, 128, 128);
 
-const std::string GameAssets::FONT = GetResourceDir() + "/font.ttf";
+const std::string GameAssets::FONT = GetResourceDir() + "font.ttf";
 
 const std::string AssetSettings::EXPLOSION::TEXTURE_PATH = GetResourceDir() + "explosion.png";
 const std::string AssetSettings::EARTH::TEXTURE_PATH = GetResourceDir() + "earth.png";

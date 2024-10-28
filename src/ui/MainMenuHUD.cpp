@@ -1,6 +1,5 @@
 #include "ui/MainMenuHUD.hpp"
 #include "GameConfig.hpp"
-#include <iostream>
 
 MainMenuHUD::MainMenuHUD(sf::RenderWindow& window)
 	: MenuHUD{ window }

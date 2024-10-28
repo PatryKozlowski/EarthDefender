@@ -1,4 +1,5 @@
 #include "Application.hpp"
+#include "AssetManager.hpp"
 
 Application::Application(const unsigned int width, const unsigned int height, const std::string& title, const sf::Uint32 style)
 	: m_Window{ sf::VideoMode(width, height), title, style },

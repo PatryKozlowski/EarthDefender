@@ -1,5 +1,4 @@
 #include "MeteorManager.hpp"
-#include "AssetManager.hpp"
 
 MeteorManager::MeteorManager(sf::RenderWindow& window)
 	: m_Window{ window }
@@ -54,11 +53,6 @@ void MeteorManager::HandleClick(sf::Vector2i& mousePosition, unsigned int& playe
 			}
 		}
 	}
-
-	m_Meteors.erase(
-		std::remove_if(m_Meteors.begin(), m_Meteors.end(), [](const std::unique_ptr<Meteor>& meteor)
-			{ return meteor->IsDestroyed(); }),
-		m_Meteors.end());
 }
 
 void MeteorManager::SetMeteorTypes(const std::vector<MeteorData>& meteorTypes)

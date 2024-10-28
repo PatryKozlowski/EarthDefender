@@ -4,44 +4,44 @@
 
 Text::Text()
 {
-    LoadFont();
+	LoadFont();
 }
 
 void Text::LoadFont()
 {
-    AssetManager::GetInstance().LoadFont(GameAssets::FONT);
+	AssetManager::GetInstance().LoadFont(GameAssets::FONT);
 
-    const sf::Font &font = AssetManager::GetInstance().GetFont(GameAssets::FONT);
+	const sf::Font& font = AssetManager::GetInstance().GetFont(GameAssets::FONT);
 
-    m_Text.setFont(font);
+	m_Text.setFont(font);
 }
 
-void Text::SetText(const std::string &text)
+void Text::SetText(const std::string& text)
 {
-    m_Text.setString(text);
+	m_Text.setString(text);
 }
 
-void Text::SetPosition(const sf::Vector2f &position)
+void Text::SetPosition(const sf::Vector2f& position)
 {
-    m_Text.setPosition(position);
+	m_Text.setPosition(position);
 }
 
 void Text::SetSize(unsigned int size)
 {
-    m_Text.setCharacterSize(size);
+	m_Text.setCharacterSize(size);
 }
 
-void Text::SetColor(const sf::Color &color)
+void Text::SetColor(const sf::Color& color)
 {
-    m_Text.setFillColor(color);
+	m_Text.setFillColor(color);
 }
 
-void Text::Draw(sf::RenderWindow &window) const
+void Text::Draw(sf::RenderWindow& window) const
 {
-    window.draw(m_Text);
+	window.draw(m_Text);
 }
 
 sf::FloatRect Text::GetBound() const
 {
-    return m_Text.getGlobalBounds();
+	return m_Text.getGlobalBounds();
 }

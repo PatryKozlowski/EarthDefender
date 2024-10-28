@@ -12,17 +12,14 @@ public:
 	GamePlayHUD(sf::RenderWindow& window);
 
 	void Draw() const;
-	void Update(const unsigned int& playersLives, const unsigned int& score, const float& time);
+	void Update(const float deltaTime);
+	void SetGameTime(const float& time);
+	void SetPlayerScore(const unsigned int& score);
+	void SetPlayerLives(const unsigned int& playerLives);
 
 private:
 	sf::RenderWindow& m_Window;
 	std::vector<Heart> m_Hearts;
 	GameTime m_GameTime;
 	Coin m_Coin;
-
-	void InitHeart();
-	void SetTime(const float& time);
-	void SetScore(const unsigned int& score);
-	void UpdateHearts(const unsigned int& playerLives);
-
 };

@@ -2,8 +2,8 @@
 #include "AssetManager.hpp"
 #include "GameConfig.hpp"
 
-Heart::Heart(float x, float y)
-	: Object(AssetSettings::HEART::TEXTURE_PATH, AssetSettings::HEART::SCALE, x, y)
+Heart::Heart()
+	: Object(AssetSettings::HEART::TEXTURE_PATH, AssetSettings::HEART::SCALE, 0.0f, 0.0f)
 {
 }
 

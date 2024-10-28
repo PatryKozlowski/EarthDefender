@@ -3,9 +3,9 @@
 
 int main()
 {
-    Application *app = new Application(WindowConfig::WIDTH, WindowConfig::HEIGHT, WindowConfig::TITLE, WindowConfig::STYLE);
+	Application* app = new Application(WindowConfig::WIDTH, WindowConfig::HEIGHT, WindowConfig::TITLE, WindowConfig::STYLE);
 
-    app->Run();
+	app->Run();
 
-    delete app;
+	delete app;
 }

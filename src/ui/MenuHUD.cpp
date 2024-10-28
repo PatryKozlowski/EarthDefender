@@ -1,7 +1,6 @@
 #include "ui/MenuHUD.hpp"
 #include "AssetManager.hpp"
 #include "GameConfig.hpp"
-#include <iostream>
 
 MenuHUD::MenuHUD(sf::RenderWindow& window)
 	: m_Window{ window },

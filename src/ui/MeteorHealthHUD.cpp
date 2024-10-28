@@ -2,7 +2,7 @@
 
 MeteorHealthHUD::MeteorHealthHUD()
 	: m_HealthText{ std::make_unique<Text>() },
-	m_Heart{ std::make_unique<Heart>(0.0f, 0.0f) },
+	m_Heart{ std::make_unique<Heart>() },
 	m_ScaleFactor{ 0.5f },
 	m_AnimatonSpeed{ 0.1f },
 	m_IsAnimating{ false }
