@@ -57,6 +57,11 @@ void Object::SetObjectTextureRect(int x, int y, int width, int height)
 	m_Sprite.setTextureRect(sf::IntRect(x, y, width, height));
 }
 
+void Object::SetObjectOrigin(float x, float y)
+{
+	m_Sprite.setOrigin(x, y);
+}
+
 float Object::GetObjectRadius() const
 {
 	return GetObjectBound().width / 2.0f;

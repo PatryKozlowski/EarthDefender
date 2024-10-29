@@ -1,14 +1,14 @@
-#include "ui/MenuHUD.hpp"
+#include "ui/menu/MenuHUD.hpp"
 #include "AssetManager.hpp"
 #include "GameConfig.hpp"
 
-MenuHUD::MenuHUD(sf::RenderWindow& window)
-	: m_Window{ window },
-	m_Title{ std::make_unique<Text>() }
+MenuHUD::MenuHUD(sf::RenderWindow &window)
+	: m_Window{window},
+	  m_Title{std::make_unique<Text>()}
 {
 }
 
-void MenuHUD::HandleInput(const sf::Event& event)
+void MenuHUD::HandleInput(const sf::Event &event)
 {
 	if (event.type == sf::Event::MouseMoved)
 	{
@@ -23,7 +23,7 @@ void MenuHUD::HandleInput(const sf::Event& event)
 
 void MenuHUD::HandleMouseMove(float x, float y) const
 {
-	for (auto& option : m_Options)
+	for (auto &option : m_Options)
 	{
 		if (option.text->GetBound().contains(x, y))
 		{
@@ -38,7 +38,7 @@ void MenuHUD::HandleMouseMove(float x, float y) const
 
 void MenuHUD::HandleMouseClick(float x, float y)
 {
-	for (const auto& option : m_Options)
+	for (const auto &option : m_Options)
 	{
 		if (option.text->GetBound().contains(x, y))
 		{
@@ -47,30 +47,30 @@ void MenuHUD::HandleMouseClick(float x, float y)
 	}
 }
 
-void MenuHUD::AddOption(const std::string& label)
+void MenuHUD::AddOption(const std::string &label)
 {
-	m_Options.push_back({ label, std::make_unique<Text>() });
+	m_Options.push_back({label, std::make_unique<Text>()});
 }
 
 void MenuHUD::Draw()
 {
 	DrawMenuTitle(m_Window);
 
-	for (const auto& option : m_Options)
+	for (const auto &option : m_Options)
 	{
 		option.text->Draw(m_Window);
 	}
 }
 
-void MenuHUD::InitOptions(const std::vector<std::string>& options)
+void MenuHUD::InitOptions(const std::vector<std::string> &options)
 {
 	float yOffset = MenuConfig::OPTION_Y;
 
-	for (const auto& label : options)
+	for (const auto &label : options)
 	{
 		AddOption(label);
 
-		auto& option = m_Options.back();
+		auto &option = m_Options.back();
 		option.text->SetText(option.label);
 		option.text->SetSize(MenuConfig::OPTION_SIZE);
 		option.text->SetColor(MenuConfig::OPTION_COLOR);
@@ -79,7 +79,7 @@ void MenuHUD::InitOptions(const std::vector<std::string>& options)
 	}
 }
 
-void MenuHUD::DrawMenuTitle(sf::RenderWindow& window)
+void MenuHUD::DrawMenuTitle(sf::RenderWindow &window)
 {
 	m_Title->SetText(MenuConfig::TITLE);
 	m_Title->SetSize(MenuConfig::TITLE_SIZE);
@@ -88,6 +88,6 @@ void MenuHUD::DrawMenuTitle(sf::RenderWindow& window)
 	m_Title->Draw(window);
 }
 
-void MenuHUD::OnOptionClick([[maybe_unused]] const std::string& label)
+void MenuHUD::OnOptionClick([[maybe_unused]] const std::string &label)
 {
 }

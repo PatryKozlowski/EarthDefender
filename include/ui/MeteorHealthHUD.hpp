@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Text.hpp"
-#include "Heart.hpp"
+#include "ui/icons/Heart.hpp"
 
 class MeteorHealthHUD
 {

@@ -4,7 +4,7 @@
 Application::Application(const unsigned int width, const unsigned int height, const std::string& title, const sf::Uint32 style)
 	: m_Window{ sf::VideoMode(width, height), title, style },
 	m_TargetFps{ WindowConfig::TARGET_FPS },
-	m_CurrentGameState{ GameState::MENU },
+	m_CurrentGameState{ GameStateID::MENU },
 	m_MainMenuHUD{ m_Window },
 	m_EndGameHUD{ m_Window },
 	m_Game{ std::make_unique<Game>(m_Window) }
@@ -60,7 +60,7 @@ void Application::HandleGameStateInput(const sf::Event& event)
 {
 	switch (m_CurrentGameState)
 	{
-	case GameState::MENU:
+	case GameStateID::MENU:
 		m_MainMenuHUD.HandleInput(event);
 
 		if (m_MainMenuHUD.IsStartGame())
@@ -70,12 +70,12 @@ void Application::HandleGameStateInput(const sf::Event& event)
 
 		else if (m_MainMenuHUD.IsExitGame())
 		{
-			m_CurrentGameState = GameState::EXIT;
+			m_CurrentGameState = GameStateID::EXIT;
 			m_Window.close();
 		}
 		break;
 
-	case GameState::END_GAME:
+	case GameStateID::END_GAME:
 		m_EndGameHUD.HandleInput(event);
 
 		if (m_EndGameHUD.IsRestartGame())
@@ -89,7 +89,7 @@ void Application::HandleGameStateInput(const sf::Event& event)
 
 		else if (m_EndGameHUD.IsExitGame())
 		{
-			m_CurrentGameState = GameState::EXIT;
+			m_CurrentGameState = GameStateID::EXIT;
 			m_Window.close();
 		}
 
@@ -104,21 +104,21 @@ void Application::UpdateGameStates()
 {
 	switch (m_CurrentGameState)
 	{
-	case GameState::MENU:
+	case GameStateID::MENU:
 		m_MainMenuHUD.Draw();
 		break;
 
-	case GameState::PLAYING:
+	case GameStateID::PLAYING:
 		m_Game->StartGame();
 
-		if (m_Game->GetCurrentGameState() == GameState::END_GAME)
+		if (m_Game->GetCurrentGameState() == GameStateID::END_GAME)
 		{
-			m_CurrentGameState = GameState::END_GAME;
+			m_CurrentGameState = GameStateID::END_GAME;
 		}
 
 		break;
 
-	case GameState::END_GAME:
+	case GameStateID::END_GAME:
 		m_EndGameHUD.Draw();
 
 		break;

@@ -2,7 +2,6 @@
 
 #include "Object.hpp"
 #include "ui/Text.hpp"
-#include "ui/Heart.hpp"
 #include "ui/MeteorHealthHUD.hpp"
 #include "ui/Explosion.hpp"
 

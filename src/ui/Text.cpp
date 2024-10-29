@@ -31,6 +31,11 @@ void Text::SetSize(unsigned int size)
 	m_Text.setCharacterSize(size);
 }
 
+void Text::SetOrigin(const sf::Vector2f& origin)
+{
+	m_Text.setOrigin(origin);
+}
+
 void Text::SetColor(const sf::Color& color)
 {
 	m_Text.setFillColor(color);

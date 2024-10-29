@@ -1,4 +1,4 @@
-#include "ui/Heart.hpp"
+#include "ui/icons/Heart.hpp"
 #include "AssetManager.hpp"
 #include "GameConfig.hpp"
 

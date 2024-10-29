@@ -62,7 +62,7 @@ void Meteor::SetRandomPosition()
 	unsigned int meteorRadius = static_cast<unsigned int>(GetObjectBound().width / 2);
 	unsigned int xPosition = static_cast<unsigned int>(rand()) % (WindowConfig::WIDTH - meteorRadius * 2);
 
-	float yPosition = (GamePlayHUDConfig::BACKGROUND_Y_OFFSET + 5.0f);
+	float yPosition = (TopBarHUDConfig::BACKGROUND_Y_OFFSET + 5.0f);
 
 	SetObjectPosition(static_cast<float>(xPosition), yPosition);
 }
@@ -73,8 +73,9 @@ void Meteor::Move(float deltaTime)
 	float positionY = GetObjectPosition().y;
 
 	float speed = m_Speed * deltaTime;
+	positionY += speed;
 
-	SetObjectPosition(positionX, positionY + speed);
+	SetObjectPosition(positionX, positionY);
 }
 
 void Meteor::Explode(bool isMeteorExplosionByPlayer)

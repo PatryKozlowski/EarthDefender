@@ -5,8 +5,8 @@ Game::Game(sf::RenderWindow& window)
 	: m_Window{ window },
 	m_GameTimer{ std::make_unique<Timer>(GameConfig::GAME_TIME) },
 	m_MeteorsSpawnTimer{ std::make_unique<Timer>(GameConfig::METEOR_SPAWN_INTERVAL) },
-	m_CurrentGameState{ GameState::PLAYING },
-	m_GamePlayHUD{ std::make_unique<GamePlayHUD>(m_Window) },
+	m_CurrentGameState{ GameStateID::PLAYING },
+	m_TopBarHUD{ std::make_unique<TopBarHUD>(m_Window) },
 	m_PlayerEarth{ std::make_unique<Earth>() },
 	m_MeteorManager{ std::make_unique<MeteorManager>(m_Window) },
 	m_PlayerHealth{ GameConfig::INIT_HEALTH },
@@ -16,7 +16,8 @@ Game::Game(sf::RenderWindow& window)
 
 void Game::StartGame()
 {
-	DrawGameHUD();
+	DrawTopBarHUD();
+
 	m_PlayerEarth->Draw(m_Window);
 
 	StartTimers();
@@ -41,7 +42,7 @@ void Game::RestartGame()
 	m_MeteorsSpawnTimer->Reset();
 	m_PlayerScore = GameConfig::INIT_SCORE;
 	m_PlayerHealth = GameConfig::INIT_HEALTH;
-	m_CurrentGameState = GameState::PLAYING;
+	m_CurrentGameState = GameStateID::PLAYING;
 }
 
 void Game::HandleClick(sf::Vector2i& mousePosition)
@@ -49,17 +50,17 @@ void Game::HandleClick(sf::Vector2i& mousePosition)
 	m_MeteorManager->HandleClick(mousePosition, m_PlayerScore);
 }
 
-GameState Game::GetCurrentGameState() const
+GameStateID Game::GetCurrentGameState() const
 {
 	return m_CurrentGameState;
 }
 
-void Game::DrawGameHUD()
+void Game::DrawTopBarHUD()
 {
-	m_GamePlayHUD->SetPlayerScore(m_PlayerScore);
-	m_GamePlayHUD->SetPlayerLives(m_PlayerHealth);
-	m_GamePlayHUD->SetGameTime(m_GameTimer->GetLeftTime());
-	m_GamePlayHUD->Draw();
+	m_TopBarHUD->SetPlayerScore(m_PlayerScore);
+	m_TopBarHUD->SetPlayerLife(m_PlayerHealth);
+	m_TopBarHUD->SetGameTime(m_GameTimer->GetLeftTime());
+	m_TopBarHUD->Draw();
 }
 
 void Game::StartTimers()
@@ -82,7 +83,7 @@ void Game::Update(float deltaTime)
 {
 	m_MeteorManager->Update(deltaTime);
 	m_MeteorsSpawnTimer->Update(deltaTime);
-	m_GamePlayHUD->Update(deltaTime);
+	m_TopBarHUD->Update(deltaTime);
 	m_GameTimer->Update(deltaTime);
 }
 
@@ -113,7 +114,7 @@ void Game::EndGame()
 {
 	StopTimers();
 	m_MeteorManager->ClearMeteors();
-	m_CurrentGameState = GameState::END_GAME;
+	m_CurrentGameState = GameStateID::END_GAME;
 }
 
 void Game::GameOver()
@@ -121,5 +122,5 @@ void Game::GameOver()
 	StopTimers();
 	m_MeteorManager->ClearMeteors();
 	//m_CurrentGameState = GameState::GAME_OVER;
-	m_CurrentGameState = GameState::END_GAME;
+	m_CurrentGameState = GameStateID::END_GAME;
 }

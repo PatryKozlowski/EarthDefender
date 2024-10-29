@@ -4,7 +4,6 @@
 #include <vector>
 #include "Earth.hpp"
 #include "GameConfig.hpp"
-#include "ui/GamePlayHUD.hpp"
 
 class MeteorManager
 {

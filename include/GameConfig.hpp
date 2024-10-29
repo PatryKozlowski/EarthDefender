@@ -75,7 +75,7 @@ struct AssetSettings
 		static constexpr float Y_OFFSET = 10.0f;
 	};
 
-	struct TIME_TEXT
+	struct CLOCK
 	{
 		static const std::string TEXTURE_PATH;
 		static constexpr float SCALE = 1.05f;
@@ -125,7 +125,7 @@ struct AssetSettings
 	};
 };
 
-enum class GameState
+enum class GameStateID
 {
 	MENU,
 	PLAYING,
@@ -133,6 +133,13 @@ enum class GameState
 	GAME_OVER,
 	EXIT
 };
+
+enum class StatElementID
+{
+	GAME_TIME_BAR,
+	PLAYER_SCORE_BAR
+};
+
 
 struct MenuOption
 {
@@ -159,7 +166,7 @@ struct MenuConfig
 	static constexpr float OPTION_Y_OFFSET = 50.0f;
 };
 
-struct GamePlayHUDConfig
+struct TopBarHUDConfig
 {
 	static const sf::Color TEXT_COLOR;
 	static constexpr unsigned int TEXT_SIZE = 36;

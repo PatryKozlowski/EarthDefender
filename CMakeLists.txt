@@ -45,17 +45,14 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Text.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Text.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/MenuHUD.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/MenuHUD.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/menu/MenuHUD.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/menu/MenuHUD.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/EndGameHUD.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/EndGameHUD.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/menu/EndGameHUD.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/menu/EndGameHUD.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/GamePlayHUD.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/GamePlayHUD.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/MainMenuHUD.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/MainMenuHUD.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/menu/MainMenuHUD.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/menu/MainMenuHUD.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/AssetManager.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/AssetManager.cpp
@@ -72,14 +69,29 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Earth.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Earth.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Heart.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Heart.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/Heart.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/Heart.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/GameTime.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/GameTime.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/Coin.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/Coin.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Coin.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Coin.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/Clock.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/Clock.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/PlayerLifesBar.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/PlayerLifesBar.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/GameTimeBar.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/GameTimeBar.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/PlayerScoreBar.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/PlayerScoreBar.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/StatElement.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/StatElement.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/TopBarHUD.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/TopBarHUD.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/MeteorHealthHUD.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/MeteorHealthHUD.cpp

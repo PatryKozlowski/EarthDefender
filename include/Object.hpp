@@ -14,6 +14,7 @@ public:
 	void CenterObjectHorizontal(float windowWidth);
 	void SetObjectPositionBottom(float windowHeight, float yOffset);
 	void SetObjectTextureRect(int x, int y, int width, int height);
+	void SetObjectOrigin(float x, float y);
 	float GetObjectRadius() const;
 	sf::FloatRect GetObjectBound() const;
 	sf::Vector2f GetObjectPosition() const;
