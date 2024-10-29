@@ -1,4 +1,4 @@
-#include "Earth.hpp"
+#include "ui/Earth.hpp"
 #include "AssetManager.hpp"
 #include "GameConfig.hpp"
 

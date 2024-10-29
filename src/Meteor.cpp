@@ -104,11 +104,11 @@ void Meteor::Destroy()
 	m_Destroyed = true;
 }
 
-void Meteor::TakeDamage(const unsigned int& damage)
+void Meteor::Hit()
 {
 	if (m_Health > 0)
 	{
-		m_Health -= damage;
+		m_Health -= 1;
 		UpdateHealthText(m_Health);
 	}
 

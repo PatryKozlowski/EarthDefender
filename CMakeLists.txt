@@ -66,8 +66,8 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Object.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Object.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Earth.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Earth.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Earth.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Earth.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/Heart.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/Heart.cpp
@@ -104,6 +104,15 @@ add_executable(${PROJECT_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/MeteorManager.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/MeteorManager.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Buff.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Buff.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/BuffManager.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/BuffManager.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Player.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Player.cpp
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC

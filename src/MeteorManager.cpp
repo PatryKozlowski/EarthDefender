@@ -1,7 +1,8 @@
 #include "MeteorManager.hpp"
 
-MeteorManager::MeteorManager(sf::RenderWindow& window)
-	: m_Window{ window }
+MeteorManager::MeteorManager(sf::RenderWindow& window, Player& player)
+	: m_Window{ window },
+	m_Player{ player }
 {
 }
 
@@ -38,18 +39,18 @@ void MeteorManager::DrawMeteors(sf::RenderWindow& window) const
 	}
 }
 
-void MeteorManager::HandleClick(sf::Vector2i& mousePosition, unsigned int& playerScore)
+void MeteorManager::HandleClick(sf::Vector2i& mousePosition)
 {
 	for (auto& meteor : m_Meteors)
 	{
 		if (meteor->IsClicked(mousePosition))
 		{
-			meteor->TakeDamage(1);
+			meteor->Hit();
 			meteor->UpdateHealthText(meteor->GetDamage());
 
 			if (meteor->GetHealth() == 0)
 			{
-				playerScore += meteor->GetScore();
+				IncrementScore(meteor->GetScore());
 			}
 		}
 	}
@@ -60,16 +61,16 @@ void MeteorManager::SetMeteorTypes(const std::vector<MeteorData>& meteorTypes)
 	m_MeteorTypes = meteorTypes;
 }
 
-void MeteorManager::CheckCollisions(const Earth& earth, unsigned int& playerLife)
+void MeteorManager::CheckCollisions()
 {
 	for (auto& meteor : m_Meteors)
 	{
-		if (IsCollision(*meteor, earth))
+		if (IsCollision(*meteor, m_Player.GetPlayerObject()))
 		{
 			if (!meteor->HasExploded())
 			{
 				meteor->Explode(false);
-				playerLife -= meteor->GetDamage();
+				DecreaseHealth(meteor->GetDamage());
 			}
 		}
 	}
@@ -78,6 +79,16 @@ void MeteorManager::CheckCollisions(const Earth& earth, unsigned int& playerLife
 void MeteorManager::ClearMeteors()
 {
 	m_Meteors.clear();
+}
+
+void MeteorManager::IncrementScore(unsigned int meteorScore)
+{
+	m_Player.IncrementScore(meteorScore);
+}
+
+void MeteorManager::DecreaseHealth(unsigned int meteorDamage)
+{
+	m_Player.DecreaseHealth(meteorDamage);
 }
 
 bool MeteorManager::IsCollision(const Meteor& meteor, const Earth& earth)

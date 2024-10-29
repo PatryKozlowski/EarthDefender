@@ -7,30 +7,28 @@ Game::Game(sf::RenderWindow& window)
 	m_MeteorsSpawnTimer{ std::make_unique<Timer>(GameConfig::METEOR_SPAWN_INTERVAL) },
 	m_CurrentGameState{ GameStateID::PLAYING },
 	m_TopBarHUD{ std::make_unique<TopBarHUD>(m_Window) },
-	m_PlayerEarth{ std::make_unique<Earth>() },
-	m_MeteorManager{ std::make_unique<MeteorManager>(m_Window) },
-	m_PlayerHealth{ GameConfig::INIT_HEALTH },
-	m_PlayerScore{ GameConfig::INIT_SCORE }
+	m_Player{ std::make_unique<Player>() },
+	m_MeteorManager{ std::make_unique<MeteorManager>(m_Window, *m_Player) }
 {
 }
 
 void Game::StartGame()
 {
+	const bool isGameTimeExpired = m_GameTimer->IsExpired();
+
 	DrawTopBarHUD();
 
-	m_PlayerEarth->Draw(m_Window);
+	m_Player->SpawnPlayer(m_Window);
 
 	StartTimers();
 
 	UpdateMeteorSpawning();
 
-	const bool isGameTimeExpired = m_GameTimer->IsExpired();
-
 	if (isGameTimeExpired)
 	{
 		EndGame();
 	}
-	else if (m_PlayerHealth <= 0)
+	else if (m_Player->GetHealth() <= 0)
 	{
 		GameOver();
 	}
@@ -40,14 +38,14 @@ void Game::RestartGame()
 {
 	m_GameTimer->Reset();
 	m_MeteorsSpawnTimer->Reset();
-	m_PlayerScore = GameConfig::INIT_SCORE;
-	m_PlayerHealth = GameConfig::INIT_HEALTH;
+	m_Player->SetScore(GameConfig::INIT_SCORE);
+	m_Player->SetHealth(GameConfig::INIT_HEALTH);
 	m_CurrentGameState = GameStateID::PLAYING;
 }
 
 void Game::HandleClick(sf::Vector2i& mousePosition)
 {
-	m_MeteorManager->HandleClick(mousePosition, m_PlayerScore);
+	m_MeteorManager->HandleClick(mousePosition);
 }
 
 GameStateID Game::GetCurrentGameState() const
@@ -57,8 +55,8 @@ GameStateID Game::GetCurrentGameState() const
 
 void Game::DrawTopBarHUD()
 {
-	m_TopBarHUD->SetPlayerScore(m_PlayerScore);
-	m_TopBarHUD->SetPlayerLife(m_PlayerHealth);
+	m_TopBarHUD->SetPlayerScore(m_Player->GetScore());
+	m_TopBarHUD->SetPlayerLife(m_Player->GetHealth());
 	m_TopBarHUD->SetGameTime(m_GameTimer->GetLeftTime());
 	m_TopBarHUD->Draw();
 }
@@ -101,7 +99,7 @@ void Game::UpdateMeteorSpawning()
 
 	m_MeteorManager->DrawMeteors(m_Window);
 
-	m_MeteorManager->CheckCollisions(*m_PlayerEarth, m_PlayerHealth);
+	m_MeteorManager->CheckCollisions();
 }
 
 void Game::StopTimers()

@@ -125,6 +125,11 @@ struct AssetSettings
 	};
 };
 
+enum class BuffTypeID
+{
+	DOUBLE_DAMAGE
+};
+
 enum class GameStateID
 {
 	MENU,

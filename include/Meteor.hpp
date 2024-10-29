@@ -13,7 +13,7 @@ public:
 	void Update(float deltaTime) override;
 	void Draw(sf::RenderWindow& window) const override;
 	void Destroy();
-	void TakeDamage(const unsigned int& damage);
+	void Hit();
 	void UpdateHealthText(const unsigned int& health);
 	void Explode(bool isMeteorExplosionByPlayer);
 	unsigned int GetHealth() const;
