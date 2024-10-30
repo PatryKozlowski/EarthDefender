@@ -13,14 +13,13 @@ public:
 	void Update(float deltaTime) override;
 	void Draw(sf::RenderWindow& window) const override;
 	void Destroy();
-	void Hit();
+	void Hit(unsigned int damage);
 	void UpdateHealthText(const unsigned int& health);
 	void Explode(bool isMeteorExplosionByPlayer);
 	unsigned int GetHealth() const;
 	unsigned int GetDamage() const;
 	unsigned int GetScore() const;
 	bool IsDestroyed() const;
-	bool IsClicked(const sf::Vector2i& mousePosition) const;
 	bool HasExploded() const;
 
 private:
@@ -28,7 +27,6 @@ private:
 	unsigned int m_Health;
 	unsigned int m_Damage;
 	unsigned int m_Score;
-	float m_Radius;
 	bool m_Destroyed;
 	bool m_HasExploded;
 	std::unique_ptr<MeteorHealthHUD> m_HealthHUD;

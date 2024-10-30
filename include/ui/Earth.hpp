@@ -6,7 +6,7 @@ class Earth : public Object
 {
 public:
 	Earth();
-	void Draw(sf::RenderWindow& window) const override;
+	void Draw(sf::RenderWindow& window) const;
 
 
 private:

@@ -3,6 +3,7 @@
 #include "GameConfig.hpp"
 #include "Timer.hpp"
 #include "MeteorManager.hpp"
+#include "BuffManager.hpp"
 #include "ui/bars/TopBarHUD.hpp"
 
 class Game
@@ -19,15 +20,19 @@ private:
 	sf::RenderWindow& m_Window;
 	std::unique_ptr<Timer> m_GameTimer;
 	std::unique_ptr<Timer> m_MeteorsSpawnTimer;
+	std::unique_ptr<Timer> m_BuffsSpawnTimer;
 	GameStateID m_CurrentGameState;
 	std::unique_ptr<TopBarHUD> m_TopBarHUD;
 	std::unique_ptr<Player> m_Player;
 	std::unique_ptr<MeteorManager> m_MeteorManager;
+	std::unique_ptr<BuffManager> m_BuffManager;
 
 	void DrawTopBarHUD();
 	void StartTimers();
 	void StopTimers();
 	void UpdateMeteorSpawning();
+	void UpdateBuffSpawning();
+	void ResetSpowners();
 	void EndGame();
 	void GameOver();
 };

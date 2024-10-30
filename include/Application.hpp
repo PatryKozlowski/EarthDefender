@@ -8,7 +8,7 @@
 class Application
 {
 public:
-	Application(unsigned int width, unsigned int height, const std::string &title, sf::Uint32 style);
+	Application(unsigned int width, unsigned int height, const std::string& title, sf::Uint32 style);
 	~Application() = default;
 
 	void Run();
@@ -22,6 +22,6 @@ private:
 	EndGameHUD m_EndGameHUD;
 	std::unique_ptr<Game> m_Game;
 
-	void HandleGameStateInput(const sf::Event &event);
+	void HandleGameStateInput(const sf::Event& event);
 	void UpdateGameStates();
 };

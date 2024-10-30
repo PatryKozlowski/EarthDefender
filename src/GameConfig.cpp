@@ -16,6 +16,9 @@ const std::string AssetSettings::METEOR::SMALL::TEXTURE_PATH = GetResourceDir() 
 const std::string AssetSettings::METEOR::MEDIUM::TEXTURE_PATH = GetResourceDir() + "meteor_medium.png";
 const std::string AssetSettings::METEOR::LARGE::TEXTURE_PATH = GetResourceDir() + "meteor_large.png";
 
+const std::string AssetSettings::BUFF::DOUBLE_DAMAGE::TEXTURE_PATH = GetResourceDir() + "clock.png";
+const std::string AssetSettings::BUFF::DOUBLE_SCORE::TEXTURE_PATH = GetResourceDir() + "coin.png";
+
 const sf::Color MenuConfig::TITLE_COLOR = WHITE;
 const sf::Color MenuConfig::OPTION_COLOR = WHITE;
 const sf::Color MenuConfig::OPTION_HIGHLIGHT_COLOR = MAGENTA;
@@ -27,4 +30,9 @@ const std::vector<MeteorData> AssetSettings::METEOR::METEOR_TYPES = {
 	{AssetSettings::METEOR::SMALL::TEXTURE_PATH, AssetSettings::METEOR::SMALL::HEALTH, AssetSettings::METEOR::SMALL::SPEED,AssetSettings::METEOR::SMALL::DAMAGE, AssetSettings::METEOR::SMALL::SCORE},
 	{AssetSettings::METEOR::MEDIUM::TEXTURE_PATH, AssetSettings::METEOR::MEDIUM::HEALTH, AssetSettings::METEOR::MEDIUM::SPEED,AssetSettings::METEOR::SMALL::DAMAGE, AssetSettings::METEOR::MEDIUM::SCORE},
 	{AssetSettings::METEOR::LARGE::TEXTURE_PATH, AssetSettings::METEOR::LARGE::HEALTH, AssetSettings::METEOR::LARGE::SPEED, AssetSettings::METEOR::SMALL::DAMAGE, AssetSettings::METEOR::LARGE::SCORE},
+};
+
+const std::vector<BuffData> AssetSettings::BUFF::BUFF_TYPES = {
+	{AssetSettings::BUFF::DOUBLE_DAMAGE::TEXTURE_PATH, BuffTypeID::DOUBLE_DAMAGE, AssetSettings::BUFF::DOUBLE_DAMAGE::DURATION},
+	{AssetSettings::BUFF::DOUBLE_SCORE::TEXTURE_PATH, BuffTypeID::DOUBLE_SCORE, AssetSettings::BUFF::DOUBLE_SCORE::DURATION},
 };

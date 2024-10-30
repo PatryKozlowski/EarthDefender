@@ -20,17 +20,14 @@ void MeteorHealthHUD::Update(float deltaTime)
 	if (m_IsAnimating)
 	{
 		m_AnimatonSpeed -= deltaTime;
-		if (m_AnimatonSpeed > 0.0f)
-		{
-			m_ScaleFactor = 0.64f;
-		}
-		else
-		{
-			m_ScaleFactor = 0.5f;
-			m_IsAnimating = false;
-		}
 
-		m_Heart->SetObjectScale(m_ScaleFactor, m_ScaleFactor);
+		m_ScaleFactor += deltaTime * 0.55f;
+
+		if (m_ScaleFactor >= 0.65)
+		{
+			m_IsAnimating = false;
+			m_ScaleFactor = 0.5f;
+		}
 	}
 }
 

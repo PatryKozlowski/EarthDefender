@@ -1,6 +1,5 @@
 #include "Meteor.hpp"
 #include "GameConfig.hpp"
-#include <AssetManager.hpp>
 
 Meteor::Meteor(const std::string& pathName, float speed, unsigned int health, unsigned int damage, unsigned int score)
 	: Object(pathName, AssetSettings::METEOR::SCALE, 0.0f, 0.0f),
@@ -14,8 +13,6 @@ Meteor::Meteor(const std::string& pathName, float speed, unsigned int health, un
 	m_HasExploded{ false }
 {
 	SetRandomPosition();
-
-	m_Radius = GetObjectRadius();
 }
 
 void Meteor::Update(float deltaTime)
@@ -88,7 +85,7 @@ void Meteor::Explode(bool isMeteorExplosionByPlayer)
 	else
 	{
 		m_Explosion = std::make_unique<Explosion>(false);
-		float offsetY = m_Radius;
+		float offsetY = GetObjectRadius();
 
 		sf::Vector2f explosionPosition = GetObjectPosition();
 		explosionPosition.y += offsetY;
@@ -104,17 +101,25 @@ void Meteor::Destroy()
 	m_Destroyed = true;
 }
 
-void Meteor::Hit()
+void Meteor::Hit(unsigned int damage)
 {
 	if (m_Health > 0)
 	{
-		m_Health -= 1;
-		UpdateHealthText(m_Health);
-	}
+		if (damage >= m_Health)
+		{
+			m_Health = 0;
+		}
+		else
+		{
+			m_Health -= damage;
+		}
 
-	if (m_Health <= 0 && !HasExploded())
-	{
-		Explode(true);
+		UpdateHealthText(m_Health);
+
+		if (m_Health == 0 && !HasExploded())
+		{
+			Explode(true);
+		}
 	}
 }
 
@@ -148,23 +153,6 @@ bool Meteor::IsDestroyed() const
 	}
 
 	return meteorOutSideWindow || m_Destroyed;
-}
-
-bool Meteor::IsClicked(const sf::Vector2i& mousePosition) const
-{
-	auto meteorPosition = GetObjectPosition();
-	float meteorRadius = m_Radius;
-	float meteorPositionX = meteorPosition.x;
-	float meteorPositionY = meteorPosition.y;
-	float meteorCenterX = meteorPositionX + meteorRadius;
-	float meteorCenterY = meteorPositionY + meteorRadius;
-	float mousePositionX = mousePosition.x;
-	float mousePositionY = mousePosition.y;
-	auto meteorCenter = sf::Vector2f(meteorCenterX, meteorCenterY);
-
-	float distance = std::sqrt(std::pow(mousePositionX - meteorCenterX, 2) + std::pow(mousePositionY - meteorCenterY, 2));
-
-	return distance <= meteorRadius;
 }
 
 bool Meteor::HasExploded() const

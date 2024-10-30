@@ -20,6 +20,7 @@ public:
 	sf::Vector2f GetObjectPosition() const;
 	virtual void Update(float deltaTime);
 	virtual void Draw(sf::RenderWindow& window) const;
+	bool IsClicked(sf::Vector2i mousePosition) const;
 
 private:
 	sf::Sprite m_Sprite;

@@ -20,6 +20,7 @@ struct GameConfig
 	static constexpr float METEOR_SPAWN_INTERVAL = 1.0f;
 	static constexpr unsigned int INIT_HEALTH = 3;
 	static constexpr unsigned int INIT_SCORE = 0;
+	static constexpr unsigned int INIT_PLAYER_DMG = 1;
 };
 
 struct GameAssets
@@ -34,6 +35,19 @@ struct MeteorData
 	float speed;
 	unsigned int damage;
 	unsigned int score;
+};
+
+enum class BuffTypeID
+{
+	DOUBLE_DAMAGE,
+	DOUBLE_SCORE
+};
+
+struct BuffData
+{
+	std::string texturePath;
+	BuffTypeID id;
+	float duration;
 };
 
 struct AssetSettings
@@ -56,6 +70,24 @@ struct AssetSettings
 		{
 			static constexpr unsigned int FRAME_START_X = 0;
 			static constexpr unsigned int FRAME_END_Y = 0;
+		};
+	};
+
+	struct BUFF
+	{
+		static const std::vector<BuffData> BUFF_TYPES;
+		static constexpr float SPAWN_INTERVAL = 12.0f;
+		static constexpr float SCALE = 1.0f;
+
+		struct DOUBLE_DAMAGE
+		{
+			static const std::string TEXTURE_PATH;
+			static constexpr float DURATION = 5.0f;
+		};
+		struct DOUBLE_SCORE
+		{
+			static const std::string TEXTURE_PATH;
+			static constexpr float DURATION = 5.0f;
 		};
 	};
 
@@ -111,7 +143,7 @@ struct AssetSettings
 			static constexpr int HEALTH = 2;
 			static constexpr float SPEED = 100.0f;
 			static const unsigned int DAMAGE = 2;
-			static constexpr unsigned int SCORE = 2;
+			static constexpr unsigned int SCORE = 1;
 		};
 
 		struct LARGE
@@ -120,14 +152,9 @@ struct AssetSettings
 			static constexpr int HEALTH = 3;
 			static constexpr float SPEED = 150.0f;
 			static const unsigned int DAMAGE = 3;
-			static constexpr unsigned int SCORE = 3;
+			static constexpr unsigned int SCORE = 1;
 		};
 	};
-};
-
-enum class BuffTypeID
-{
-	DOUBLE_DAMAGE
 };
 
 enum class GameStateID
