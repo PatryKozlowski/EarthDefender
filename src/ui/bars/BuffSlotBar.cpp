@@ -2,6 +2,7 @@
 #include "ui/icons/DoubleDamage.hpp"
 #include "ui/icons/DoubleScore.hpp"
 #include "ui/icons/ShieldBuff.hpp"
+#include "ui/icons/SlowClock.hpp"
 
 BuffSlotBar::BuffSlotBar()
 {
@@ -42,6 +43,10 @@ void BuffSlotBar::SetBuffSlot(const BuffTypeID& buffType)
 
 	case BuffTypeID::INVINCIBILITY:
 		SetBuffIcon(std::make_unique<ShieldBuff>());
+		break;
+
+	case BuffTypeID::SLOW_METEOR_SPEED:
+		SetBuffIcon(std::make_unique<SlowClock>());
 		break;
 
 	default:

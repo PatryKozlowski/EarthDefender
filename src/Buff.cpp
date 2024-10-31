@@ -63,48 +63,6 @@ void Buff::UpdateAnimation(float deltaTime)
 	SetObjectScale(m_AnimationScale, m_AnimationScale);
 }
 
-void Buff::ApplyEffect(Player& player)
-{
-	switch (m_Type)
-	{
-	case BuffTypeID::DOUBLE_DAMAGE:
-		player.SetDoubleDamage(true);
-		break;
-
-	case BuffTypeID::DOUBLE_SCORE:
-		player.SetDoubleScore(true);
-		break;
-
-	case BuffTypeID::INVINCIBILITY:
-		player.SetInvincible(true);
-		break;
-
-	default:
-		break;
-	}
-}
-
-void Buff::RemoveEffect(Player& player)
-{
-	switch (m_Type)
-	{
-	case BuffTypeID::DOUBLE_DAMAGE:
-		player.SetDoubleDamage(false);
-		break;
-
-	case BuffTypeID::DOUBLE_SCORE:
-		player.SetDoubleScore(false);
-		break;
-
-	case BuffTypeID::INVINCIBILITY:
-		player.SetInvincible(false);
-		break;
-
-	default:
-		break;
-	}
-}
-
 void Buff::SetRandomPosition()
 {
 	unsigned int buffIconRadius = static_cast<unsigned int>(GetObjectBound().width / 2);

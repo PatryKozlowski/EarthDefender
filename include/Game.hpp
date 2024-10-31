@@ -5,6 +5,9 @@
 #include "MeteorManager.hpp"
 #include "BuffManager.hpp"
 #include "ui/bars/TopBarHUD.hpp"
+#include "Affect.hpp"
+#include "ui/EarthEntityHUD.hpp"
+
 
 class Game
 {
@@ -18,21 +21,24 @@ public:
 
 private:
 	sf::RenderWindow& m_Window;
-	std::unique_ptr<Timer> m_GameTimer;
-	std::unique_ptr<Timer> m_MeteorsSpawnTimer;
-	std::unique_ptr<Timer> m_BuffsSpawnTimer;
+	Timer m_GameTimer;
+	Timer m_MeteorsSpawnTimer;
+	Timer m_BuffsSpawnTimer;
 	GameStateID m_CurrentGameState;
-	std::unique_ptr<TopBarHUD> m_TopBarHUD;
-	std::unique_ptr<Player> m_Player;
-	std::unique_ptr<MeteorManager> m_MeteorManager;
-	std::unique_ptr<BuffManager> m_BuffManager;
+	TopBarHUD m_TopBarHUD;
+	Affect m_Affect;
+	Player m_Player;
+	EarthEntityHUD m_EarthEntityHUD;
+	MeteorManager m_MeteorManager;
+	BuffManager m_BuffManager;
 
 	void DrawTopBarHUD();
+	void DrawEarthEntityHUD();
 	void StartTimers();
 	void StopTimers();
 	void UpdateMeteorSpawning();
 	void UpdateBuffSpawning();
-	void ResetSpowners();
+	void ResetSpawners();
 	void EndGame();
 	void GameOver();
 };

@@ -87,6 +87,9 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/DoubleScore.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/DoubleScore.cpp
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/SlowClock.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/SlowClock.cpp
+
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/PlayerLifesBar.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/PlayerLifesBar.cpp
 
@@ -117,6 +120,9 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/ShieldHUD.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/ShieldHUD.cpp
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/EarthEntityHUD.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/EarthEntityHUD.cpp
+    
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Meteor.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Meteor.cpp
 
@@ -131,6 +137,9 @@ add_executable(${PROJECT_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Player.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Player.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Affect.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Affect.cpp
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC

@@ -20,6 +20,7 @@ const std::string AssetSettings::METEOR::LARGE::TEXTURE_PATH = GetResourceDir() 
 const std::string AssetSettings::BUFF::DOUBLE_DAMAGE::TEXTURE_PATH = GetResourceDir() + "buffs/double_damage.png";
 const std::string AssetSettings::BUFF::DOUBLE_SCORE::TEXTURE_PATH = GetResourceDir() + "buffs/double_score.png";
 const std::string AssetSettings::BUFF::INVINCIBILITY::TEXTURE_PATH = GetResourceDir() + "buffs/shield_buff.png";
+const std::string AssetSettings::BUFF::SLOW_METEOR_SPEED::TEXTURE_PATH = GetResourceDir() + "buffs/slow_clock.png";
 
 const sf::Color MenuConfig::TITLE_COLOR = WHITE;
 const sf::Color MenuConfig::OPTION_COLOR = WHITE;
@@ -38,4 +39,5 @@ const std::vector<BuffData> AssetSettings::BUFF::BUFF_TYPES = {
 	{AssetSettings::BUFF::DOUBLE_DAMAGE::TEXTURE_PATH, BuffTypeID::DOUBLE_DAMAGE, AssetSettings::BUFF::DOUBLE_DAMAGE::DURATION},
 	{AssetSettings::BUFF::DOUBLE_SCORE::TEXTURE_PATH, BuffTypeID::DOUBLE_SCORE, AssetSettings::BUFF::DOUBLE_SCORE::DURATION},
 	{AssetSettings::BUFF::INVINCIBILITY::TEXTURE_PATH, BuffTypeID::INVINCIBILITY, AssetSettings::BUFF::INVINCIBILITY::DURATION},
+	{AssetSettings::BUFF::SLOW_METEOR_SPEED::TEXTURE_PATH, BuffTypeID::SLOW_METEOR_SPEED, AssetSettings::BUFF::SLOW_METEOR_SPEED::DURATION},
 };

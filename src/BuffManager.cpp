@@ -1,8 +1,9 @@
 #include "BuffManager.hpp"
 
-BuffManager::BuffManager(sf::RenderWindow& window, Player& player)
+BuffManager::BuffManager(sf::RenderWindow& window, Player& player, Affect& affect)
 	: m_Window{ window },
-	m_Player{ player }
+	m_Player{ player },
+	m_Affect{ affect }
 {
 }
 
@@ -15,7 +16,7 @@ void BuffManager::Update(float deltaTime)
 
 		if (buff->IsDestroyed())
 		{
-			buff->RemoveEffect(m_Player);
+			m_Affect.RemoveEffect(buff->GetBuffType());
 		}
 	}
 
@@ -59,7 +60,7 @@ void BuffManager::HandleClick(sf::Vector2i& mousePosition)
 		{
 			buff->SetActive(true);
 			buff->Collect();
-			buff->ApplyEffect(m_Player);
+			m_Affect.ApplyEffect(buff->GetBuffType());
 		}
 	}
 }

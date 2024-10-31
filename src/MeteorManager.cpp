@@ -1,8 +1,10 @@
 #include "MeteorManager.hpp"
 
-MeteorManager::MeteorManager(sf::RenderWindow& window, Player& player)
+MeteorManager::MeteorManager(sf::RenderWindow& window, Player& player, Affect& affect, EarthEntityHUD& earthEntity)
 	: m_Window{ window },
-	m_Player{ player }
+	m_Player{ player },
+	m_Affect{ affect },
+	m_EarthEntity{ earthEntity }
 {
 }
 
@@ -15,7 +17,7 @@ void MeteorManager::SpawnMeteor()
 
 	const MeteorData& randomMeteorData = m_MeteorTypes[static_cast<size_t>(rand() % static_cast<int>(m_MeteorTypes.size()))];
 
-	m_Meteors.emplace_back(std::make_unique<Meteor>(randomMeteorData.texturePath, randomMeteorData.speed, randomMeteorData.health, randomMeteorData.damage, randomMeteorData.score));
+	m_Meteors.emplace_back(std::make_unique<Meteor>(m_Affect, randomMeteorData.texturePath, randomMeteorData.speed, randomMeteorData.health, randomMeteorData.damage, randomMeteorData.score));
 }
 
 void MeteorManager::Update(float deltaTime)
@@ -65,7 +67,7 @@ void MeteorManager::CheckCollisions()
 {
 	for (auto& meteor : m_Meteors)
 	{
-		if (IsCollision(*meteor, m_Player.GetPlayerObject()))
+		if (IsCollision(*meteor, m_EarthEntity.GetEarthEntity()))
 		{
 			if (!meteor->HasExploded())
 			{

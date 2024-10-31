@@ -17,7 +17,8 @@ struct WindowConfig
 struct GameConfig
 {
 	static constexpr float GAME_TIME = 61.0f;
-	static constexpr float METEOR_SPAWN_INTERVAL = 1.0f;
+	static constexpr float METEOR_SPAWN_INTERVAL = 0.58f;
+	static constexpr float SPAWN_INTERVAL = 13.0f;
 	static constexpr unsigned int INIT_HEALTH = 5;
 	static constexpr unsigned int INIT_SCORE = 0;
 	static constexpr unsigned int INIT_PLAYER_DMG = 1;
@@ -57,7 +58,8 @@ enum class BuffTypeID
 	NONE,
 	DOUBLE_DAMAGE,
 	DOUBLE_SCORE,
-	INVINCIBILITY
+	INVINCIBILITY,
+	SLOW_METEOR_SPEED
 };
 
 struct BuffData
@@ -93,7 +95,6 @@ struct AssetSettings
 	struct BUFF
 	{
 		static const std::vector<BuffData> BUFF_TYPES;
-		static constexpr float SPAWN_INTERVAL = 12.0f;
 		static constexpr float SCALE = 1.0f;
 
 		struct DOUBLE_DAMAGE
@@ -110,6 +111,12 @@ struct AssetSettings
 		{
 			static const std::string TEXTURE_PATH;
 			static constexpr float DURATION = 3.0f;
+		};
+		struct SLOW_METEOR_SPEED
+		{
+			static const std::string TEXTURE_PATH;
+			static constexpr float DURATION = 3.0f;
+			static constexpr float SPEED_MULTIPLIER = 0.5f;
 		};
 	};
 
@@ -140,6 +147,13 @@ struct AssetSettings
 	struct CLOCK
 	{
 		static const std::string TEXTURE_PATH;
+		static constexpr float SCALE = 1.05f;
+		static constexpr float X_OFFSET = 10.0f;
+		static constexpr float Y_OFFSET = 10.0f;
+	};
+
+	struct SLOW_CLOCK
+	{
 		static constexpr float SCALE = 1.05f;
 		static constexpr float X_OFFSET = 10.0f;
 		static constexpr float Y_OFFSET = 10.0f;

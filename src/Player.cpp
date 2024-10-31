@@ -1,26 +1,15 @@
 #include "Player.hpp"
 #include "GameConfig.hpp"
 
-Player::Player()
-	: m_Earth{ std::make_unique<Earth>() },
-	m_ShieldHUD{ std::make_unique<ShieldHUD>(*m_Earth) },
-	m_Stats{ GameConfig::INIT_HEALTH, GameConfig::INIT_SCORE, GameConfig::INIT_PLAYER_DMG }
+Player::Player(Affect& affect)
+	: m_Stats{ GameConfig::INIT_HEALTH, GameConfig::INIT_SCORE, GameConfig::INIT_PLAYER_DMG },
+	m_Affect{ affect }
 {
-}
-
-void Player::SpawnPlayer(sf::RenderWindow& window) const
-{
-	m_Earth->Draw(window);
-
-	if (IsInvincible())
-	{
-		m_ShieldHUD->Draw(window);
-	}
 }
 
 void Player::DecreaseHealth(unsigned int damage)
 {
-	if (IsInvincible())
+	if (m_Affect.IsInvincible())
 	{
 		return;
 	}
@@ -30,7 +19,7 @@ void Player::DecreaseHealth(unsigned int damage)
 
 void Player::IncrementScore(unsigned int score)
 {
-	if (IsDoubleScore())
+	if (m_Affect.IsDoubleScore())
 	{
 		score *= 2;
 	}
@@ -40,28 +29,10 @@ void Player::IncrementScore(unsigned int score)
 
 unsigned int Player::GetDamage() const
 {
-	if (IsDoubleDamage())
+	if (m_Affect.IsDoubleDamage())
 	{
 		return m_Stats.damage * 2;
 	}
 
 	return m_Stats.damage;
-}
-
-BuffTypeID Player::GetActiveBuff() const
-{
-	if (IsDoubleScore())
-	{
-		return BuffTypeID::DOUBLE_SCORE;
-	}
-	else if (IsDoubleDamage())
-	{
-		return BuffTypeID::DOUBLE_DAMAGE;
-	}
-	else if (IsInvincible())
-	{
-		return BuffTypeID::INVINCIBILITY;
-	}
-
-	return BuffTypeID::NONE;
 }
