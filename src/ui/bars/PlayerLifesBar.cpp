@@ -1,11 +1,8 @@
 #include "ui/bars/PlayerLifesBar.hpp"
 #include "GameConfig.hpp"
-#include <iostream>
 
 PlayerLifesBar::PlayerLifesBar()
-	: m_ScaleFactor{ 1.0 },
-	m_AnimationSpeed{ 0.1f },
-	m_IsAnimating{ false }
+	: m_Animation{ 1.0f, 0.1f, false }
 {
 }
 
@@ -21,17 +18,17 @@ void PlayerLifesBar::Draw(sf::RenderWindow& window) const
 
 void PlayerLifesBar::Update(float deltaTime)
 {
-	if (m_IsAnimating)
+	if (IsAnimating())
 	{
-		m_AnimationSpeed -= deltaTime;
+		SetAnimationSpeed(GetAnimationSpeed() - deltaTime);
 
-		m_ScaleFactor += deltaTime * 1.20f;
-		m_Hearts.back()->SetObjectScale(m_ScaleFactor, m_ScaleFactor);
+		SetScaleFactor(GetScaleFactor() + deltaTime * 1.20f);
+		m_Hearts.back()->SetObjectScale(GetScaleFactor(), GetScaleFactor());
 
-		if (m_ScaleFactor >= 1.35f)
+		if (GetScaleFactor() >= 1.35f)
 		{
-			m_IsAnimating = false;
-			m_ScaleFactor = 1.0f;
+			SetAnimation(false);
+			SetScaleFactor(1.0f);
 			m_Hearts.pop_back();
 		}
 	}
@@ -60,5 +57,5 @@ void PlayerLifesBar::SetLife(unsigned int livesCount)
 
 void PlayerLifesBar::StartAnimation()
 {
-	m_IsAnimating = true;
+	SetAnimation(true);
 }

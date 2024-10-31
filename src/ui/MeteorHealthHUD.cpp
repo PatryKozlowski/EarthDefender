@@ -3,9 +3,7 @@
 MeteorHealthHUD::MeteorHealthHUD()
 	: m_HealthText{ std::make_unique<Text>() },
 	m_Heart{ std::make_unique<Heart>() },
-	m_ScaleFactor{ 0.5f },
-	m_AnimatonSpeed{ 0.1f },
-	m_IsAnimating{ false }
+	m_Animation{ 0.5f, 0.1f, false }
 {
 }
 
@@ -17,16 +15,16 @@ void MeteorHealthHUD::Draw(sf::RenderWindow& window)
 
 void MeteorHealthHUD::Update(float deltaTime)
 {
-	if (m_IsAnimating)
+	if (IsAnimating())
 	{
-		m_AnimatonSpeed -= deltaTime;
+		SetAnimationSpeed(GetAnimationSpeed() - deltaTime);
 
-		m_ScaleFactor += deltaTime * 0.55f;
+		SetScaleFactor(GetScaleFactor() + deltaTime * 0.55f);
 
-		if (m_ScaleFactor >= 0.65)
+		if (GetScaleFactor() >= 0.65)
 		{
-			m_IsAnimating = false;
-			m_ScaleFactor = 0.5f;
+			SetIsAnimating(false);
+			SetScaleFactor(0.5f);
 		}
 	}
 }
@@ -39,7 +37,7 @@ void MeteorHealthHUD::UpdateHealthText(const unsigned int& health)
 void MeteorHealthHUD::InitMeteorHealthHUD(sf::Vector2f position, const unsigned int& health)
 {
 	m_Heart->SetObjectPosition(position.x, position.y - 15);
-	m_Heart->SetObjectScale(m_ScaleFactor, m_ScaleFactor);
+	m_Heart->SetObjectScale(GetScaleFactor(), GetScaleFactor());
 
 	const float heartIconWidth = m_Heart->GetObjectBound().width;
 
@@ -51,6 +49,6 @@ void MeteorHealthHUD::InitMeteorHealthHUD(sf::Vector2f position, const unsigned 
 
 void MeteorHealthHUD::StartAnimation()
 {
-	m_IsAnimating = true;
-	m_AnimatonSpeed = 0.1f;
+	SetIsAnimating(true);
+	SetAnimationSpeed(0.1f);
 }

@@ -21,10 +21,15 @@ void EarthEntityHUD::Update(float deltaTime)
 {
 	if (m_Affect.IsInvincible() && !m_ShieldHUD)
 	{
-		m_ShieldHUD.emplace(m_Earth);
+		m_ShieldHUD.emplace(m_Earth, m_Affect);
 	}
 	else if (!m_Affect.IsInvincible() && m_ShieldHUD)
 	{
 		m_ShieldHUD.reset();
+	}
+
+	if (m_ShieldHUD)
+	{
+		m_ShieldHUD->Update(deltaTime);
 	}
 }

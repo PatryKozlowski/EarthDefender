@@ -4,15 +4,15 @@ class Timer
 {
 public:
 	Timer(const float& duration);
-	void Start();
-	void Stop();
 	void Update(const float& deltaTime);
-	float GetElapsedTime() const;
-	bool IsExpired() const;
-	void Reset();
-	bool IsActive() const;
-	float GetLeftTime() const;
-	float GetDuration() const;
+	inline void Reset() { m_ElapsedTime = 0.0f; };
+	inline void Start() { m_IsActive = true; };
+	inline void Stop() { m_IsActive = false; };
+	inline float GetElapsedTime() const { return m_ElapsedTime; };
+	inline float GetLeftTime() const { return m_Duration - m_ElapsedTime; };
+	inline float GetDuration() const { return m_Duration; };
+	inline bool IsActive() const { return m_IsActive; };
+	inline bool IsExpired() const { return m_ElapsedTime >= m_Duration; };
 
 private:
 	float m_ElapsedTime;
