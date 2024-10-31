@@ -11,7 +11,7 @@ Buff::Buff(const std::string& pathName, BuffTypeID type, float duration)
 	m_IsCollected{ false },
 	m_AnimationScale{ AssetSettings::BUFF::SCALE },
 	m_AnimationSpeed{ 0.1f },
-	m_IsAnimating{ false }
+	m_IsAnimating{ true }
 {
 	SetRandomPosition();
 }
@@ -20,30 +20,18 @@ void Buff::Update(float deltaTime)
 {
 	m_TimeToCollect -= deltaTime;
 
-	if (!IsAcitve())
-	{
-		StartAnimation();
-	}
-
 	if (IsAnimating())
 	{
-		m_AnimationScale += m_AnimationSpeed * deltaTime * 2.0f;
+		UpdateAnimation(deltaTime);
 
-		if (m_AnimationScale >= 1.25f || m_AnimationScale <= 1.0f)
+		if (m_TimeToCollect <= 0.0f && !IsActive())
 		{
-			m_AnimationSpeed = -m_AnimationSpeed;
+			SetAnimating(false);
+			SetToDestroy();
 		}
-
-		SetObjectScale(m_AnimationScale, m_AnimationScale);
 	}
 
-	if (m_TimeToCollect <= 0.0f && !IsAcitve())
-	{
-		SetAnimating(false);
-		SetToDestroy();
-	}
-
-	if (IsAcitve())
+	if (IsActive())
 	{
 		m_Duration -= deltaTime;
 
@@ -63,6 +51,18 @@ void Buff::Draw(sf::RenderWindow& window) const
 	}
 }
 
+void Buff::UpdateAnimation(float deltaTime)
+{
+	m_AnimationScale += m_AnimationSpeed * deltaTime * 2.0f;
+
+	if (m_AnimationScale >= 1.25f || m_AnimationScale <= 1.0f)
+	{
+		m_AnimationSpeed = -m_AnimationSpeed;
+	}
+
+	SetObjectScale(m_AnimationScale, m_AnimationScale);
+}
+
 void Buff::ApplyEffect(Player& player)
 {
 	switch (m_Type)
@@ -73,6 +73,10 @@ void Buff::ApplyEffect(Player& player)
 
 	case BuffTypeID::DOUBLE_SCORE:
 		player.SetDoubleScore(true);
+		break;
+
+	case BuffTypeID::INVINCIBILITY:
+		player.SetInvincible(true);
 		break;
 
 	default:
@@ -92,14 +96,13 @@ void Buff::RemoveEffect(Player& player)
 		player.SetDoubleScore(false);
 		break;
 
+	case BuffTypeID::INVINCIBILITY:
+		player.SetInvincible(false);
+		break;
+
 	default:
 		break;
 	}
-}
-
-void Buff::StartAnimation()
-{
-	SetAnimating(true);
 }
 
 void Buff::SetRandomPosition()

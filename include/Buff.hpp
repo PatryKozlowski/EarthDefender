@@ -11,15 +11,15 @@ public:
 
 	void Update(float deltaTime) override;
 	void Draw(sf::RenderWindow& window) const override;
+	void UpdateAnimation(float deltaTime);
 	void ApplyEffect(Player& player);
 	void RemoveEffect(Player& player);
-	void StartAnimation();
 	inline void SetActive(bool isActive) { m_IsActive = isActive; };
 	inline void Collect() { m_IsCollected = true; };
 	inline bool IsCollected() const { return m_IsCollected; };
 	inline bool IsDestroyed() const { return m_Destroyed; };
 	inline void SetToDestroy() { m_Destroyed = true; };
-	inline bool IsAcitve() const { return m_IsActive; };
+	inline bool IsActive() const { return m_IsActive; };
 	inline bool IsAnimating() const { return m_IsAnimating; };
 	inline void SetAnimating(bool isAnimating) { m_IsAnimating = isAnimating; };
 

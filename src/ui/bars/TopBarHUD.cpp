@@ -5,7 +5,8 @@ TopBarHUD::TopBarHUD(sf::RenderWindow& window)
 	: m_Window{ window },
 	m_GameTimeBar{ std::make_unique<GameTimeBar>() },
 	m_PlayerScoreBar{ std::make_unique<PlayerScoreBar>() },
-	m_PlayerLifesBar{ std::make_unique<PlayerLifesBar>() }
+	m_PlayerLifesBar{ std::make_unique<PlayerLifesBar>() },
+	m_BuffSlotBar{ std::make_unique<BuffSlotBar>() }
 {
 	InitTopBarHUD();
 }
@@ -24,6 +25,11 @@ void TopBarHUD::SetPlayerScore(const unsigned int& score)
 void TopBarHUD::SetPlayerLife(const unsigned int& playerLife)
 {
 	m_PlayerLifesBar->SetLife(playerLife);
+}
+
+void TopBarHUD::SetBuffSlot(const BuffTypeID& buffType) const
+{
+	m_BuffSlotBar->SetBuffSlot(buffType);
 }
 
 void TopBarHUD::InitTopBarHUD()
@@ -49,4 +55,5 @@ void TopBarHUD::Draw() const
 	m_PlayerLifesBar->Draw(m_Window);
 	m_GameTimeBar->Draw(m_Window);
 	m_PlayerScoreBar->Draw(m_Window);
+	m_BuffSlotBar->Draw(m_Window);
 }

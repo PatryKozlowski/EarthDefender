@@ -18,7 +18,7 @@ struct GameConfig
 {
 	static constexpr float GAME_TIME = 61.0f;
 	static constexpr float METEOR_SPAWN_INTERVAL = 1.0f;
-	static constexpr unsigned int INIT_HEALTH = 3;
+	static constexpr unsigned int INIT_HEALTH = 5;
 	static constexpr unsigned int INIT_SCORE = 0;
 	static constexpr unsigned int INIT_PLAYER_DMG = 1;
 };
@@ -37,10 +37,27 @@ struct MeteorData
 	unsigned int score;
 };
 
+enum class GameStateID
+{
+	MENU,
+	PLAYING,
+	END_GAME,
+	GAME_OVER,
+	EXIT
+};
+
+enum class StatElementID
+{
+	GAME_TIME_BAR,
+	PLAYER_SCORE_BAR,
+};
+
 enum class BuffTypeID
 {
+	NONE,
 	DOUBLE_DAMAGE,
-	DOUBLE_SCORE
+	DOUBLE_SCORE,
+	INVINCIBILITY
 };
 
 struct BuffData
@@ -89,6 +106,11 @@ struct AssetSettings
 			static const std::string TEXTURE_PATH;
 			static constexpr float DURATION = 5.0f;
 		};
+		struct INVINCIBILITY
+		{
+			static const std::string TEXTURE_PATH;
+			static constexpr float DURATION = 3.0f;
+		};
 	};
 
 	struct EARTH
@@ -97,6 +119,14 @@ struct AssetSettings
 		static constexpr float SCALE = 1.05f;
 		static constexpr float Y_OFFSET = 50.0f;
 	};
+
+	struct SHIELD
+	{
+		static const std::string TEXTURE_PATH;
+		static constexpr float SCALE = 1.0f;
+		static constexpr float Y_OFFSET = 50.0f;
+	};
+
 
 	struct HEART
 	{
@@ -156,22 +186,6 @@ struct AssetSettings
 		};
 	};
 };
-
-enum class GameStateID
-{
-	MENU,
-	PLAYING,
-	END_GAME,
-	GAME_OVER,
-	EXIT
-};
-
-enum class StatElementID
-{
-	GAME_TIME_BAR,
-	PLAYER_SCORE_BAR
-};
-
 
 struct MenuOption
 {

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ui/Earth.hpp"
+#include "ui/ShieldHUD.hpp"
+#include "GameConfig.hpp"
 
 class Player
 {
@@ -12,7 +14,7 @@ public:
 	inline unsigned int GetScore() const { return m_Stats.score; }
 	inline void SetHealth(unsigned int health) { m_Stats.health = health; }
 	inline void SetScore(unsigned int score) { m_Stats.score = score; }
-	inline void DecreaseHealth(unsigned int damage) { m_Stats.health -= damage; }
+	void DecreaseHealth(unsigned int damage);
 	void IncrementScore(unsigned int score);
 	unsigned int GetDamage() const;
 	inline Earth& GetPlayerObject() { return *m_Earth; }
@@ -24,11 +26,15 @@ public:
 	inline void SetDoubleDamage(bool isDoubleDamage) { m_Buffs.doubleDamage = isDoubleDamage; }
 	inline bool IsDoubleDamage() const { return m_Buffs.doubleDamage; }
 
-	inline void SetInvincible() { m_Buffs.invincible = true; }
+	inline void SetInvincible(bool isInvincible) { m_Buffs.invincible = isInvincible; }
 	inline bool IsInvincible() const { return m_Buffs.invincible; }
+
+	BuffTypeID GetActiveBuff() const;
 
 private:
 	std::unique_ptr<Earth> m_Earth;
+	std::unique_ptr<ShieldHUD> m_ShieldHUD;
+
 	struct Stats
 	{
 		unsigned int health;

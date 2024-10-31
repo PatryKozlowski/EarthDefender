@@ -25,5 +25,12 @@ private:
 template<typename T>
 inline void StatElement::SetText(T& text) const
 {
-	m_Text->SetText(std::to_string(text));
+	if constexpr (std::is_arithmetic<T>::value)
+	{
+		m_Text->SetText(std::to_string(text));
+	}
+	else
+	{
+		m_Text->SetText(text);
+	}
 }

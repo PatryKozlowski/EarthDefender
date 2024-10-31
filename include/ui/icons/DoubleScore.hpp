@@ -2,9 +2,9 @@
 
 #include "Object.hpp"
 
-class Coin : public Object
+class DoubleScore : public Object
 {
 public:
-	Coin();
+	DoubleScore();
 	void Draw(sf::RenderWindow& window) const override;
 };

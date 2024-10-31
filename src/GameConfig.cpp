@@ -12,12 +12,14 @@ const std::string AssetSettings::EARTH::TEXTURE_PATH = GetResourceDir() + "earth
 const std::string AssetSettings::HEART::TEXTURE_PATH = GetResourceDir() + "heart.png";
 const std::string AssetSettings::CLOCK::TEXTURE_PATH = GetResourceDir() + "clock.png";
 const std::string AssetSettings::COIN::TEXTURE_PATH = GetResourceDir() + "coin.png";
+const std::string AssetSettings::SHIELD::TEXTURE_PATH = GetResourceDir() + "shield.png";
 const std::string AssetSettings::METEOR::SMALL::TEXTURE_PATH = GetResourceDir() + "meteor_small.png";
 const std::string AssetSettings::METEOR::MEDIUM::TEXTURE_PATH = GetResourceDir() + "meteor_medium.png";
 const std::string AssetSettings::METEOR::LARGE::TEXTURE_PATH = GetResourceDir() + "meteor_large.png";
 
-const std::string AssetSettings::BUFF::DOUBLE_DAMAGE::TEXTURE_PATH = GetResourceDir() + "clock.png";
-const std::string AssetSettings::BUFF::DOUBLE_SCORE::TEXTURE_PATH = GetResourceDir() + "coin.png";
+const std::string AssetSettings::BUFF::DOUBLE_DAMAGE::TEXTURE_PATH = GetResourceDir() + "buffs/double_damage.png";
+const std::string AssetSettings::BUFF::DOUBLE_SCORE::TEXTURE_PATH = GetResourceDir() + "buffs/double_score.png";
+const std::string AssetSettings::BUFF::INVINCIBILITY::TEXTURE_PATH = GetResourceDir() + "buffs/shield_buff.png";
 
 const sf::Color MenuConfig::TITLE_COLOR = WHITE;
 const sf::Color MenuConfig::OPTION_COLOR = WHITE;
@@ -35,4 +37,5 @@ const std::vector<MeteorData> AssetSettings::METEOR::METEOR_TYPES = {
 const std::vector<BuffData> AssetSettings::BUFF::BUFF_TYPES = {
 	{AssetSettings::BUFF::DOUBLE_DAMAGE::TEXTURE_PATH, BuffTypeID::DOUBLE_DAMAGE, AssetSettings::BUFF::DOUBLE_DAMAGE::DURATION},
 	{AssetSettings::BUFF::DOUBLE_SCORE::TEXTURE_PATH, BuffTypeID::DOUBLE_SCORE, AssetSettings::BUFF::DOUBLE_SCORE::DURATION},
+	{AssetSettings::BUFF::INVINCIBILITY::TEXTURE_PATH, BuffTypeID::INVINCIBILITY, AssetSettings::BUFF::INVINCIBILITY::DURATION},
 };

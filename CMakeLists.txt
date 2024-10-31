@@ -78,6 +78,15 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/Clock.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/Clock.cpp
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/DoubleDamage.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/DoubleDamage.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/ShieldBuff.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/ShieldBuff.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/DoubleScore.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/DoubleScore.cpp
+
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/PlayerLifesBar.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/PlayerLifesBar.cpp
 
@@ -86,6 +95,9 @@ add_executable(${PROJECT_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/PlayerScoreBar.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/PlayerScoreBar.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/BuffSlotBar.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/BuffSlotBar.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/StatElement.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/StatElement.cpp
@@ -98,6 +110,12 @@ add_executable(${PROJECT_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Explosion.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Explosion.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Shield.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Shield.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/ShieldHUD.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/ShieldHUD.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Meteor.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Meteor.cpp

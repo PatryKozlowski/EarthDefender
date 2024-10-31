@@ -61,6 +61,7 @@ void Game::DrawTopBarHUD()
 	m_TopBarHUD->SetPlayerScore(m_Player->GetScore());
 	m_TopBarHUD->SetPlayerLife(m_Player->GetHealth());
 	m_TopBarHUD->SetGameTime(m_GameTimer->GetLeftTime());
+	m_TopBarHUD->SetBuffSlot(m_Player->GetActiveBuff());
 	m_TopBarHUD->Draw();
 }
 
