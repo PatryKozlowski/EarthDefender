@@ -96,6 +96,7 @@ struct AssetSettings
 	{
 		static const std::vector<BuffData> BUFF_TYPES;
 		static constexpr float SCALE = 1.0f;
+		static constexpr float TIME_TO_COLLECT = 5.0f;
 
 		struct DOUBLE_DAMAGE
 		{
