@@ -49,10 +49,6 @@ bool Object::IsClicked(sf::Vector2i mousePosition) const
 	return distance <= objectRadius;
 }
 
-void Object::SetObjectScale(float x, float y)
-{
-	m_Sprite.setScale(x, y);
-}
 
 void Object::CenterObjectHorizontal(float windowWidth)
 {
@@ -66,29 +62,4 @@ void Object::SetObjectPositionBottom(float windowHeight, float yOffset)
 	sf::FloatRect spiritBound = GetObjectBound();
 	float yPosition = windowHeight - spiritBound.height - yOffset;
 	SetObjectPosition(m_Position.x, yPosition);
-}
-
-void Object::SetObjectTextureRect(int x, int y, int width, int height)
-{
-	m_Sprite.setTextureRect(sf::IntRect(x, y, width, height));
-}
-
-void Object::SetObjectOrigin(float x, float y)
-{
-	m_Sprite.setOrigin(x, y);
-}
-
-float Object::GetObjectRadius() const
-{
-	return GetObjectBound().width / 2.0f;
-}
-
-sf::FloatRect Object::GetObjectBound() const
-{
-	return m_Sprite.getGlobalBounds();
-}
-
-sf::Vector2f Object::GetObjectPosition() const
-{
-	return m_Position;
 }
