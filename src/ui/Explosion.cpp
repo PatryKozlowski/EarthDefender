@@ -5,12 +5,9 @@
 Explosion::Explosion(bool isExplosionByPlayer)
 	: Object(AssetSettings::EXPLOSION::TEXTURE_PATH, AssetSettings::EXPLOSION::SCALE, 0.0f, 0.0f),
 	m_IsExplosionByPlayer{ isExplosionByPlayer },
-	m_IsFinished{ false },
-	m_ElapsedTime{ 0.0f },
-	m_FrameDuration{ AssetSettings::EXPLOSION::FRAME_DURATION },
-	m_CurrentFrame{ 0 }
+	m_Animation{ false, 0.0f, AssetSettings::EXPLOSION::FRAME_DURATION, 0 }
 {
-	if (m_IsExplosionByPlayer)
+	if (IsExplosionByPlayer())
 	{
 		SetObjectTextureRect(AssetSettings::EXPLOSION::DESTROYED::FRAME_START_X, AssetSettings::EXPLOSION::DESTROYED::FRAME_END_Y, AssetSettings::EXPLOSION::FRAME_WIDTH, AssetSettings::EXPLOSION::FRAME_HEIGHT);
 	}
@@ -22,16 +19,17 @@ Explosion::Explosion(bool isExplosionByPlayer)
 
 void Explosion::Update(float deltaTime)
 {
-	m_ElapsedTime += deltaTime;
+	SetElapsedTime(GetElapsedTime() + deltaTime);
 
-	if (m_ElapsedTime >= m_FrameDuration)
+	if (GetElapsedTime() >= GetFrameDuration())
 	{
-		m_ElapsedTime = 0.0f;
-		m_CurrentFrame++;
+		SetElapsedTime(0.0f);
 
-		if (m_CurrentFrame >= AssetSettings::EXPLOSION::FRAME_COUNT)
+		SetCurrentFrame(GetCurrentFrame() + 1);
+
+		if (GetCurrentFrame() >= AssetSettings::EXPLOSION::FRAME_COUNT)
 		{
-			m_IsFinished = true;
+			SetFinished(true);
 		}
 		else
 		{
@@ -46,16 +44,12 @@ void Explosion::Draw(sf::RenderWindow& window) const
 	Object::Draw(window);
 }
 
-bool Explosion::IsFinished() const
-{
-	return m_IsFinished;
-}
 
 void Explosion::UpdateTextureRect()
 {
-	int x = m_CurrentFrame * AssetSettings::EXPLOSION::FRAME_WIDTH;
+	int x = GetCurrentFrame() * AssetSettings::EXPLOSION::FRAME_WIDTH;
 
-	if (m_IsExplosionByPlayer)
+	if (IsExplosionByPlayer())
 	{
 		SetObjectTextureRect(x, AssetSettings::EXPLOSION::DESTROYED::FRAME_END_Y, AssetSettings::EXPLOSION::FRAME_WIDTH, AssetSettings::EXPLOSION::FRAME_HEIGHT);
 	}

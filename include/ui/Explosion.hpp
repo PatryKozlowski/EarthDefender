@@ -9,14 +9,27 @@ public:
 
 	void Update(float deltaTime) override;
 	void Draw(sf::RenderWindow& window) const override;
-	bool IsFinished() const;
+	inline void SetFinished(bool isFinished) { m_Animation.isFinished = isFinished; };
+	inline void SetExplosionByPlayer(bool isExplosionByPlayer) { m_IsExplosionByPlayer = isExplosionByPlayer; };
+	inline void SetCurrentFrame(unsigned int currentFrame) { m_Animation.currentFrame = currentFrame; };
+	inline void SetElapsedTime(float elapsedTime) { m_Animation.elapsedTime = elapsedTime; };
+	inline void SetFrameDuration(float frameDuration) { m_Animation.frameDuration = frameDuration; };
+	inline bool IsExplosionByPlayer() const { return m_IsExplosionByPlayer; };
+	inline bool IsFinished() const { return m_Animation.isFinished; };
+	inline unsigned int GetCurrentFrame() const { return m_Animation.currentFrame; };
+	inline float GetElapsedTime() const { return m_Animation.elapsedTime; };
+	inline float GetFrameDuration() const { return m_Animation.frameDuration; };
 
 private:
 	bool m_IsExplosionByPlayer;
-	bool m_IsFinished;
-	float m_ElapsedTime;
-	float m_FrameDuration;
-	int m_CurrentFrame;
+
+	struct Animation
+	{
+		bool isFinished;
+		float elapsedTime;
+		float frameDuration;
+		unsigned int currentFrame;
+	} m_Animation;
 
 	void UpdateTextureRect();
 };
