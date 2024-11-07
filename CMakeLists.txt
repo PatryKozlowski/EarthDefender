@@ -48,11 +48,11 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/menu/MenuHUD.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/menu/MenuHUD.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/menu/EndGameHUD.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/menu/EndGameHUD.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/menu/EndGameScoreHUD.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/menu/EndGameScoreHUD.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/menu/MainMenuHUD.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/menu/MainMenuHUD.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/menu/ContainerHUD.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/menu/ContainerHUD.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/AssetManager.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/AssetManager.cpp
@@ -68,6 +68,9 @@ add_executable(${PROJECT_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Earth.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Earth.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/Score.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/Score.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/Heart.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/Heart.cpp
@@ -90,8 +93,8 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/SlowClock.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/SlowClock.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/PlayerLifesBar.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/PlayerLifesBar.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/PlayerLivesBar.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/PlayerLivesBar.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/GameTimeBar.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/GameTimeBar.cpp
@@ -140,6 +143,9 @@ add_executable(${PROJECT_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Affect.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Affect.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ApplicationState.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ApplicationState.cpp
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC

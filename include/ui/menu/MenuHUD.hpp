@@ -3,26 +3,30 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "ui/Text.hpp"
+#include "ui/menu/ContainerHUD.hpp"
 #include "GameConfig.hpp"
+#include "ApplicationState.hpp"
 
 class MenuHUD
 {
 public:
-    MenuHUD(sf::RenderWindow &window);
-    virtual ~MenuHUD() = default;
+	MenuHUD(ApplicationState& applicationState);
 
-    virtual void HandleInput(const sf::Event &event);
-    void AddOption(const std::string &label);
-    void Draw();
+	void Draw(sf::RenderWindow& window);
+	void HandleInput(const sf::Event& event);
 
-protected:
-    void InitOptions(const std::vector<std::string> &options);
-    virtual void DrawMenuTitle(sf::RenderWindow &window);
-    virtual void OnOptionClick(const std::string &label);
-    void HandleMouseMove(float x, float y) const;
-    void HandleMouseClick(float x, float y);
+private:
+	void InitOptions();
+	void InitTitle();
+	void DrawOptions(sf::RenderWindow& window);
+	void DrawContainer(sf::RenderWindow& window);
+	void DrawTitle(sf::RenderWindow& window);
+	void HandleMouseMove(float x, float y);
+	void HandleMouseClick(float x, float y);
+	void OnOptionClick(const std::string& label);
 
-    sf::RenderWindow &m_Window;
-    std::unique_ptr<Text> m_Title;
-    std::vector<MenuOption> m_Options;
+	ApplicationState& m_ApplicationState;
+	ContainerHUD m_Container;
+	Text m_Text;
+	std::vector<MenuOption> m_Options;
 };

@@ -9,7 +9,6 @@ StatElement::StatElement(std::shared_ptr<Object> icon)
 	m_Icon->SetObjectOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 
 	m_Text->SetSize(TopBarHUDConfig::TEXT_SIZE);
-	m_Text->SetColor(TopBarHUDConfig::TEXT_COLOR);
 	m_Text->SetOrigin(sf::Vector2f(m_Text->GetBound().width / 2.0f, m_Text->GetBound().height / 2.0f));
 
 }
@@ -37,6 +36,24 @@ void StatElement::InitStatElement(StatElementID statElementID)
 		SetElementPosition(
 			{ WindowConfig::WIDTH / 2,  TopBarHUDConfig::BACKGROUND_Y_OFFSET / 2 },
 			{ WindowConfig::WIDTH / 2 + iconWidth, 2.25f });
+		break;
+
+	case StatElementID::SUMMARY_PLAYER_SCORE:
+		SetElementPosition(
+			{ 700.0f / 2,  WindowConfig::HEIGHT / 2 - 100.0f },
+			{ 700.0f / 2 + iconWidth, WindowConfig::HEIGHT / 2 - 122.0f });
+		break;
+
+	case StatElementID::SUMMARY_PLAYER_HEALTH:
+		SetElementPosition(
+			{ 700.0f / 2,  WindowConfig::HEIGHT / 2 - 50.0f },
+			{ 700.0f / 2 + iconWidth, WindowConfig::HEIGHT / 2 - 72.0f });
+		break;
+
+	case StatElementID::SUMMARY_PLAYER_TOTAL_SCORE:
+		SetElementPosition(
+			{ 700.0f / 2,  WindowConfig::HEIGHT / 2 },
+			{ 700.0f / 2 + iconWidth, WindowConfig::HEIGHT / 2 - 22.0f });
 		break;
 
 	default:

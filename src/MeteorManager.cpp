@@ -41,11 +41,11 @@ void MeteorManager::DrawMeteors(sf::RenderWindow& window) const
 	}
 }
 
-void MeteorManager::HandleClick(sf::Vector2i& mousePosition)
+void MeteorManager::HandleClick(const sf::Event& event)
 {
 	for (auto& meteor : m_Meteors)
 	{
-		if (meteor->IsClicked(mousePosition))
+		if (meteor->IsClicked(event))
 		{
 			meteor->Hit(m_Player.GetDamage());
 			meteor->UpdateHealthText(meteor->GetDamage());

@@ -14,7 +14,7 @@ public:
 	void SetObjectTexture(const std::string& texturePath);
 	void CenterObjectHorizontal(float windowWidth);
 	void SetObjectPositionBottom(float windowHeight, float yOffset);
-	bool IsClicked(sf::Vector2i mousePosition) const;
+	bool IsClicked(const sf::Event& event) const;
 	inline void SetObjectScale(float x, float y) { m_Sprite.setScale(x, y); };
 	inline void SetObjectTextureRect(int x, int y, int width, int height) { m_Sprite.setTextureRect(sf::IntRect(x, y, width, height)); };
 	inline void SetObjectOrigin(float x, float y) { m_Sprite.setOrigin(x, y); };

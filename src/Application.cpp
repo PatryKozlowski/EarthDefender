@@ -4,10 +4,8 @@
 Application::Application(const unsigned int width, const unsigned int height, const std::string& title, const sf::Uint32 style)
 	: m_Window{ sf::VideoMode(width, height), title, style },
 	m_TargetFps{ WindowConfig::TARGET_FPS },
-	m_CurrentGameState{ GameStateID::MENU },
-	m_MainMenuHUD{ m_Window },
-	m_EndGameHUD{ m_Window },
-	m_Game{ std::make_unique<Game>(m_Window) }
+	m_ApplicationState{ GameStateID::MENU },
+	m_Game{ m_Window, m_ApplicationState }
 {
 }
 
@@ -29,13 +27,8 @@ void Application::Run()
 				m_Window.close();
 			}
 
-			HandleGameStateInput(event);
+			HandleEvent(event);
 
-			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
-			{
-				sf::Vector2i mousePosition = sf::Mouse::getPosition(m_Window);
-				m_Game->HandleClick(mousePosition);
-			}
 		}
 
 		const float frameDeltaTime = m_Clock.restart().asSeconds();
@@ -49,78 +42,52 @@ void Application::Run()
 
 			UpdateGameStates();
 
-			m_Game->Update(timeStep);
+			m_Game.Update(timeStep);
 
 			m_Window.display();
 		}
 	}
 }
 
-void Application::HandleGameStateInput(const sf::Event& event)
+void Application::HandleEvent(const sf::Event& event)
 {
-	switch (m_CurrentGameState)
+	if (m_Menu)
 	{
-	case GameStateID::MENU:
-		m_MainMenuHUD.HandleInput(event);
-
-		if (m_MainMenuHUD.IsStartGame())
-		{
-			m_CurrentGameState = m_Game->GetCurrentGameState();
-		}
-
-		else if (m_MainMenuHUD.IsExitGame())
-		{
-			m_CurrentGameState = GameStateID::EXIT;
-			m_Window.close();
-		}
-		break;
-
-	case GameStateID::END_GAME:
-		m_EndGameHUD.HandleInput(event);
-
-		if (m_EndGameHUD.IsRestartGame())
-		{
-			m_Game->RestartGame();
-
-			m_CurrentGameState = m_Game->GetCurrentGameState();
-
-			m_EndGameHUD.ResetFlags();
-		}
-
-		else if (m_EndGameHUD.IsExitGame())
-		{
-			m_CurrentGameState = GameStateID::EXIT;
-			m_Window.close();
-		}
-
-		break;
-
-	default:
-		break;
+		m_Menu->HandleInput(event);
 	}
+
+	m_Game.HandleInput(event);
 }
 
 void Application::UpdateGameStates()
 {
-	switch (m_CurrentGameState)
+	switch (m_ApplicationState.GetCurrentState())
 	{
 	case GameStateID::MENU:
-		m_MainMenuHUD.Draw();
+	case GameStateID::END_GAME:
+	case GameStateID::GAME_OVER:
+		if (!m_Menu)
+		{
+			m_Menu = std::make_unique<MenuHUD>(m_ApplicationState);
+		}
+		m_Menu->Draw(m_Window);
 		break;
 
 	case GameStateID::PLAYING:
-		m_Game->StartGame();
-
-		if (m_Game->GetCurrentGameState() == GameStateID::END_GAME)
-		{
-			m_CurrentGameState = GameStateID::END_GAME;
-		}
-
+		m_Game.StartGame();
+		m_Menu.reset();
 		break;
 
-	case GameStateID::END_GAME:
-		m_EndGameHUD.Draw();
+	case GameStateID::RESTART:
+		m_Game.RestartGame();
+		break;
 
+	case GameStateID::END_GAME_SCORE:
+		m_Game.ShowScoreBoard();
+		break;
+
+	case GameStateID::EXIT:
+		m_Window.close();
 		break;
 
 	default:

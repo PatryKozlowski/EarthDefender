@@ -1,9 +1,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "ui/menu/MainMenuHUD.hpp"
+#include "ui/menu/MenuHUD.hpp"
 #include "Game.hpp"
-#include "ui/menu/EndGameHUD.hpp"
+#include "ApplicationState.hpp"
 
 class Application
 {
@@ -17,11 +17,10 @@ private:
 	sf::RenderWindow m_Window;
 	sf::Clock m_Clock;
 	float m_TargetFps;
-	GameStateID m_CurrentGameState;
-	MainMenuHUD m_MainMenuHUD;
-	EndGameHUD m_EndGameHUD;
-	std::unique_ptr<Game> m_Game;
+	ApplicationState m_ApplicationState;
+	std::unique_ptr<MenuHUD> m_Menu;
+	Game m_Game;
 
-	void HandleGameStateInput(const sf::Event& event);
+	void HandleEvent(const sf::Event& event);
 	void UpdateGameStates();
 };

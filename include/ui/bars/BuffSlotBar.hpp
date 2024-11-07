@@ -10,7 +10,6 @@ public:
 
 	void Draw(sf::RenderWindow& window) const;
 	void InitSlot();
-	void Update(float deltaTime);
 	void SetBuffSlot(const BuffTypeID& buffType);
 	void RemoveBuffIcon();
 

@@ -14,7 +14,7 @@ public:
 	void DrawBuffs(sf::RenderWindow& window) const;
 	void SpawnBuff();
 	void SetBuffTypes(const std::vector<BuffData>& buffTypes);
-	void HandleClick(sf::Vector2i& mousePosition);
+	void HandleClick(const sf::Event& event);
 	void ClearBuffs();
 
 private:

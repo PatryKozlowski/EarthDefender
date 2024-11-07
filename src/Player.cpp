@@ -14,7 +14,14 @@ void Player::DecreaseHealth(unsigned int damage)
 		return;
 	}
 
-	m_Stats.health -= damage;
+	if (damage >= GetHealth())
+	{
+		SetHealth(0);
+	}
+	else
+	{
+		SetHealth(GetHealth() - damage);
+	}
 }
 
 void Player::IncrementScore(unsigned int score)
@@ -24,7 +31,7 @@ void Player::IncrementScore(unsigned int score)
 		score *= 2;
 	}
 
-	m_Stats.score += score;
+	SetScore(GetScore() + score);
 }
 
 unsigned int Player::GetDamage() const

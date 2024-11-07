@@ -1,12 +1,12 @@
-#include "ui/bars/PlayerLifesBar.hpp"
+#include "ui/bars/PlayerLivesBar.hpp"
 #include "GameConfig.hpp"
 
-PlayerLifesBar::PlayerLifesBar()
+PlayerLivesBar::PlayerLivesBar()
 	: m_Animation{ 1.0f, 0.1f, false }
 {
 }
 
-void PlayerLifesBar::Draw(sf::RenderWindow& window) const
+void PlayerLivesBar::Draw(sf::RenderWindow& window) const
 {
 	for (const auto& heart : m_Hearts)
 	{
@@ -16,7 +16,7 @@ void PlayerLifesBar::Draw(sf::RenderWindow& window) const
 	}
 }
 
-void PlayerLifesBar::Update(float deltaTime)
+void PlayerLivesBar::Update(float deltaTime)
 {
 	if (IsAnimating())
 	{
@@ -34,7 +34,7 @@ void PlayerLifesBar::Update(float deltaTime)
 	}
 }
 
-void PlayerLifesBar::SetLife(unsigned int livesCount)
+void PlayerLivesBar::SetLife(unsigned int livesCount)
 {
 	const float heartSpacing = 20.0f;
 
@@ -55,7 +55,7 @@ void PlayerLifesBar::SetLife(unsigned int livesCount)
 	}
 }
 
-void PlayerLifesBar::StartAnimation()
+void PlayerLivesBar::StartAnimation()
 {
 	SetAnimation(true);
 }

@@ -5,10 +5,10 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 
-class PlayerLifesBar
+class PlayerLivesBar
 {
 public:
-	PlayerLifesBar();
+	PlayerLivesBar();
 
 	void Draw(sf::RenderWindow& window) const;
 	void Update(float deltaTime);

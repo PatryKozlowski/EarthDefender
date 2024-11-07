@@ -11,7 +11,6 @@ GameTimeBar::GameTimeBar()
 
 void GameTimeBar::Update(float deltaTime)
 {
-
 	SetTimeRemaining(GetTimeRemaining() - deltaTime);
 
 	if (GetTimeRemaining() <= 10.0f && GetTimeRemaining() > 0.0f)

@@ -3,9 +3,6 @@
 
 TopBarHUD::TopBarHUD(sf::RenderWindow& window)
 	: m_Window{ window },
-	m_GameTimeBar{ std::make_unique<GameTimeBar>() },
-	m_PlayerScoreBar{ std::make_unique<PlayerScoreBar>() },
-	m_PlayerLifesBar{ std::make_unique<PlayerLifesBar>() },
 	m_BuffSlotBar{ std::make_unique<BuffSlotBar>() }
 {
 	InitTopBarHUD();
@@ -14,17 +11,17 @@ TopBarHUD::TopBarHUD(sf::RenderWindow& window)
 void TopBarHUD::SetGameTime(const float& time) const
 {
 	const auto timeToShow = static_cast<unsigned int>(time);
-	m_GameTimeBar->SetText(timeToShow);
+	m_GameTimeBar.SetText(timeToShow);
 }
 
 void TopBarHUD::SetPlayerScore(const unsigned int& score)
 {
-	m_PlayerScoreBar->SetText(score);
+	m_PlayerScoreBar.SetText(score);
 }
 
 void TopBarHUD::SetPlayerLife(const unsigned int& playerLife)
 {
-	m_PlayerLifesBar->SetLife(playerLife);
+	m_PlayerLivesBar.SetLife(playerLife);
 }
 
 void TopBarHUD::SetBuffSlot(const BuffTypeID& buffType) const
@@ -34,14 +31,14 @@ void TopBarHUD::SetBuffSlot(const BuffTypeID& buffType) const
 
 void TopBarHUD::InitTopBarHUD()
 {
-	m_GameTimeBar->InitStatElement(StatElementID::GAME_TIME_BAR);
-	m_PlayerScoreBar->InitStatElement(StatElementID::PLAYER_SCORE_BAR);
+	m_GameTimeBar.InitStatElement(StatElementID::GAME_TIME_BAR);
+	m_PlayerScoreBar.InitStatElement(StatElementID::PLAYER_SCORE_BAR);
 }
 
 void TopBarHUD::Update(const float deltaTime)
 {
-	m_PlayerLifesBar->Update(deltaTime);
-	m_GameTimeBar->Update(deltaTime);
+	m_PlayerLivesBar.Update(deltaTime);
+	m_GameTimeBar.Update(deltaTime);
 }
 
 void TopBarHUD::Draw() const
@@ -52,8 +49,8 @@ void TopBarHUD::Draw() const
 
 	m_Window.draw(background);
 
-	m_PlayerLifesBar->Draw(m_Window);
-	m_GameTimeBar->Draw(m_Window);
-	m_PlayerScoreBar->Draw(m_Window);
+	m_PlayerLivesBar.Draw(m_Window);
+	m_GameTimeBar.Draw(m_Window);
+	m_PlayerScoreBar.Draw(m_Window);
 	m_BuffSlotBar->Draw(m_Window);
 }

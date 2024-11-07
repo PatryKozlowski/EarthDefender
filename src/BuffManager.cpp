@@ -52,11 +52,11 @@ void BuffManager::SetBuffTypes(const std::vector<BuffData>& buffTypes)
 	m_BuffTypes = buffTypes;
 }
 
-void BuffManager::HandleClick(sf::Vector2i& mousePosition)
+void BuffManager::HandleClick(const sf::Event& event)
 {
 	for (auto& buff : m_Buffs)
 	{
-		if (buff->IsClicked(mousePosition))
+		if (buff->IsClicked(event))
 		{
 			buff->SetActive(true);
 			buff->Collect();

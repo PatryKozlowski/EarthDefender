@@ -2,23 +2,30 @@
 #include "GameConfig.hpp"
 #include "Meteor.hpp"
 
-Game::Game(sf::RenderWindow& window)
+Game::Game(sf::RenderWindow& window, ApplicationState& applicationState)
 	: m_Window{ window },
 	m_GameTimer{ GameConfig::GAME_TIME },
 	m_MeteorsSpawnTimer{ GameConfig::METEOR_SPAWN_INTERVAL },
 	m_BuffsSpawnTimer{ GameConfig::SPAWN_INTERVAL },
-	m_CurrentGameState{ GameStateID::PLAYING },
 	m_TopBarHUD{ m_Window },
 	m_Affect{},
 	m_Player{ m_Affect },
 	m_EarthEntityHUD{ m_Affect },
 	m_MeteorManager{ m_Window, m_Player, m_Affect, m_EarthEntityHUD },
-	m_BuffManager{ m_Window, m_Player ,m_Affect }
+	m_BuffManager{ m_Window, m_Player ,m_Affect },
+	m_ApplicationState{ applicationState }
 {
 }
 
 void Game::StartGame()
 {
+	if (m_EndGameScore)
+	{
+		m_EndGameScore.reset();
+	}
+
+	m_ApplicationState.SetCurrentState(GameStateID::PLAYING);
+
 	DrawTopBarHUD();
 
 	DrawEarthEntityHUD();
@@ -41,22 +48,32 @@ void Game::StartGame()
 
 void Game::RestartGame()
 {
+	m_ApplicationState.SetCurrentState(GameStateID::PLAYING);
 	m_GameTimer.Reset();
 	m_MeteorsSpawnTimer.Reset();
 	m_Player.SetScore(GameConfig::INIT_SCORE);
 	m_Player.SetHealth(GameConfig::INIT_HEALTH);
-	m_CurrentGameState = GameStateID::PLAYING;
 }
 
-void Game::HandleClick(sf::Vector2i& mousePosition)
+void Game::HandleInput(const sf::Event& event)
 {
-	m_MeteorManager.HandleClick(mousePosition);
-	m_BuffManager.HandleClick(mousePosition);
+	m_MeteorManager.HandleClick(event);
+	m_BuffManager.HandleClick(event);
+
+	if (m_EndGameScore)
+	{
+		m_EndGameScore->HandleInput(event);
+	}
 }
 
-GameStateID Game::GetCurrentGameState() const
+void Game::ShowScoreBoard()
 {
-	return m_CurrentGameState;
+	if (!m_EndGameScore)
+	{
+		m_EndGameScore = std::make_unique<EndGameScoreHUD>(m_ApplicationState, m_Player);
+	}
+
+	m_EndGameScore->Draw(m_Window);
 }
 
 void Game::DrawTopBarHUD()
@@ -150,13 +167,12 @@ void Game::EndGame()
 {
 	StopTimers();
 	ResetSpawners();
-	m_CurrentGameState = GameStateID::END_GAME;
+	m_ApplicationState.SetCurrentState(GameStateID::END_GAME_SCORE);
 }
 
 void Game::GameOver()
 {
 	StopTimers();
 	ResetSpawners();
-	//m_CurrentGameState = GameState::GAME_OVER;
-	m_CurrentGameState = GameStateID::END_GAME;
+	m_ApplicationState.SetCurrentState(GameStateID::GAME_OVER);
 }

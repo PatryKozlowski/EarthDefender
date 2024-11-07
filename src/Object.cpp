@@ -33,20 +33,27 @@ void Object::Draw(sf::RenderWindow& window) const
 	window.draw(m_Sprite);
 }
 
-bool Object::IsClicked(sf::Vector2i mousePosition) const
+bool Object::IsClicked(const sf::Event& event) const
 {
-	auto objectPossition = GetObjectPosition();
-	float objectRadius = GetObjectRadius();
-	float objectPositionX = objectPossition.x;
-	float objectPositionY = objectPossition.y;
-	float objectCenterX = objectPositionX + objectRadius;
-	float objectCenterY = objectPositionY + objectRadius;
-	float mousePositionX = mousePosition.x;
-	float mousePositionY = mousePosition.y;
+	if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+	{
 
-	float distance = std::sqrt(std::pow(mousePositionX - objectCenterX, 2) + std::pow(mousePositionY - objectCenterY, 2));
+		auto objectPossition = GetObjectPosition();
+		float objectRadius = GetObjectRadius();
+		float objectPositionX = objectPossition.x;
+		float objectPositionY = objectPossition.y;
+		float objectCenterX = objectPositionX + objectRadius;
+		float objectCenterY = objectPositionY + objectRadius;
+		float mousePositionX = event.mouseButton.x;
+		float mousePositionY = event.mouseButton.y;
 
-	return distance <= objectRadius;
+
+		float distance = std::sqrt(std::pow(mousePositionX - objectCenterX, 2) + std::pow(mousePositionY - objectCenterY, 2));
+
+		return distance <= objectRadius;
+	}
+
+	return false;
 }
 
 

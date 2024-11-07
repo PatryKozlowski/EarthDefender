@@ -1,14 +1,23 @@
 #include "ui/menu/MenuHUD.hpp"
-#include "AssetManager.hpp"
 #include "GameConfig.hpp"
 
-MenuHUD::MenuHUD(sf::RenderWindow &window)
-	: m_Window{window},
-	  m_Title{std::make_unique<Text>()}
+MenuHUD::MenuHUD(ApplicationState& applicationState)
+	: m_ApplicationState{ applicationState }
 {
+	InitTitle();
+	InitOptions();
 }
 
-void MenuHUD::HandleInput(const sf::Event &event)
+void MenuHUD::Draw(sf::RenderWindow& window)
+{
+	DrawTitle(window);
+
+	DrawOptions(window);
+
+	DrawContainer(window);
+}
+
+void MenuHUD::HandleInput(const sf::Event& event)
 {
 	if (event.type == sf::Event::MouseMoved)
 	{
@@ -21,73 +30,110 @@ void MenuHUD::HandleInput(const sf::Event &event)
 	}
 }
 
-void MenuHUD::HandleMouseMove(float x, float y) const
+void MenuHUD::InitOptions()
 {
-	for (auto &option : m_Options)
+	auto currentState = m_ApplicationState.GetCurrentState();
+	auto mainOption = currentState == GameStateID::MENU ? MenuConfig::START_GAME : MenuConfig::PLAY_AGAIN;
+	auto options = std::vector<std::string>{ mainOption, MenuConfig::EXIT };
+
+	float yOffset = 300.0f;
+
+	for (const auto& label : options)
 	{
-		if (option.text->GetBound().contains(x, y))
+		m_Options.push_back({ label, Text() });
+
+		auto& option = m_Options.back();
+
+		option.text.SetText(option.label);
+		option.text.SetSize(MenuConfig::OPTION_SIZE);
+		option.text.SetColor(MenuConfig::OPTION_COLOR);
+		option.text.SetPosition(sf::Vector2f(m_Container.GetContainerPosition().x + (m_Container.GetContainerGlobalBounds().width - option.text.GetBound().width) / 2, yOffset));
+		yOffset += 50.0f;
+	}
+}
+
+void MenuHUD::InitTitle()
+{
+	switch (m_ApplicationState.GetCurrentState())
+	{
+	case GameStateID::MENU:
+		m_Text.SetText(MenuConfig::TITLE);
+		break;
+
+	case GameStateID::END_GAME:
+		m_Text.SetText(MenuConfig::TITLE_END_GAME);
+		break;
+
+	case GameStateID::GAME_OVER:
+		m_Text.SetText(MenuConfig::TITLE_GAME_OVER);
+		break;
+
+	default:
+		break;
+	}
+
+	m_Text.SetSize(42);
+	m_Text.SetPosition(sf::Vector2f(m_Container.GetContainerPosition().x + (m_Container.GetContainerGlobalBounds().width - m_Text.GetBound().width) / 2, 200.0f));
+}
+
+void MenuHUD::DrawOptions(sf::RenderWindow& window)
+{
+	for (const auto& option : m_Options)
+	{
+		option.text.Draw(window);
+	}
+}
+
+void MenuHUD::DrawContainer(sf::RenderWindow& window)
+{
+	m_Container.Draw(window);
+}
+
+void MenuHUD::DrawTitle(sf::RenderWindow& window)
+{
+	m_Text.Draw(window);
+}
+
+void MenuHUD::HandleMouseMove(float x, float y)
+{
+	for (auto& option : m_Options)
+	{
+		if (option.text.GetBound().contains(x, y))
 		{
-			option.text->SetColor(MenuConfig::OPTION_HIGHLIGHT_COLOR);
+			option.text.SetColor(MenuConfig::OPTION_HIGHLIGHT_COLOR);
 		}
 		else
 		{
-			option.text->SetColor(MenuConfig::OPTION_COLOR);
+			option.text.SetColor(MenuConfig::OPTION_COLOR);
 		}
 	}
 }
 
 void MenuHUD::HandleMouseClick(float x, float y)
 {
-	for (const auto &option : m_Options)
+	for (const auto& option : m_Options)
 	{
-		if (option.text->GetBound().contains(x, y))
+		if (option.text.GetBound().contains(x, y))
 		{
 			OnOptionClick(option.label);
 		}
 	}
 }
 
-void MenuHUD::AddOption(const std::string &label)
+void MenuHUD::OnOptionClick(const std::string& label)
 {
-	m_Options.push_back({label, std::make_unique<Text>()});
-}
-
-void MenuHUD::Draw()
-{
-	DrawMenuTitle(m_Window);
-
-	for (const auto &option : m_Options)
+	if (label == MenuConfig::START_GAME)
 	{
-		option.text->Draw(m_Window);
+		m_ApplicationState.SetCurrentState(GameStateID::PLAYING);
 	}
-}
 
-void MenuHUD::InitOptions(const std::vector<std::string> &options)
-{
-	float yOffset = MenuConfig::OPTION_Y;
-
-	for (const auto &label : options)
+	if (label == MenuConfig::PLAY_AGAIN)
 	{
-		AddOption(label);
-
-		auto &option = m_Options.back();
-		option.text->SetText(option.label);
-		option.text->SetSize(MenuConfig::OPTION_SIZE);
-		option.text->SetColor(MenuConfig::OPTION_COLOR);
-		option.text->SetPosition(sf::Vector2f(m_Window.getSize().x / 2 - option.text->GetBound().width / 2, yOffset));
-		yOffset += MenuConfig::OPTION_Y_OFFSET;
+		m_ApplicationState.SetCurrentState(GameStateID::RESTART);
 	}
-}
 
-void MenuHUD::DrawMenuTitle(sf::RenderWindow &window)
-{
-	m_Title->SetText(MenuConfig::TITLE);
-	m_Title->SetSize(MenuConfig::TITLE_SIZE);
-	m_Title->SetColor(MenuConfig::TITLE_COLOR);
-	m_Title->SetPosition(sf::Vector2f(window.getSize().x / 2 - m_Title->GetBound().width / 2, MenuConfig::TITLE_Y));
-	m_Title->Draw(window);
-}
-
-void MenuHUD::OnOptionClick([[maybe_unused]] const std::string &label)
-{
+	if (label == MenuConfig::EXIT)
+	{
+		m_ApplicationState.SetCurrentState(GameStateID::EXIT);
+	}
 }

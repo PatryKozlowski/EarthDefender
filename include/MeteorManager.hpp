@@ -13,7 +13,7 @@ public:
 	void SpawnMeteor();
 	void Update(float deltaTime);
 	void DrawMeteors(sf::RenderWindow& window) const;
-	void HandleClick(sf::Vector2i& mousePosition);
+	void HandleClick(const sf::Event& event);
 	void SetMeteorTypes(const std::vector<MeteorData>& meteorTypes);
 	void CheckCollisions();
 	void ClearMeteors();

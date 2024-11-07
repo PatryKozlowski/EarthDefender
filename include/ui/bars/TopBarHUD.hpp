@@ -4,7 +4,7 @@
 #include <vector>
 #include "GameTimeBar.hpp"
 #include "PlayerScoreBar.hpp"
-#include "PlayerLifesBar.hpp"
+#include "PlayerLivesBar.hpp"
 #include "BuffSlotBar.hpp"
 
 class TopBarHUD
@@ -21,10 +21,10 @@ public:
 
 private:
 	sf::RenderWindow& m_Window;
-	std::unique_ptr<GameTimeBar> m_GameTimeBar;
-	std::unique_ptr<PlayerScoreBar> m_PlayerScoreBar;
-	std::unique_ptr<PlayerLifesBar> m_PlayerLifesBar;
-	std::unique_ptr<BuffSlotBar> m_BuffSlotBar;
+	GameTimeBar m_GameTimeBar;
+	PlayerScoreBar m_PlayerScoreBar;
+	PlayerLivesBar m_PlayerLivesBar;
+	std::unique_ptr <BuffSlotBar> m_BuffSlotBar;
 
 	void InitTopBarHUD();
 };

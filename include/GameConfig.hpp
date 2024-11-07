@@ -42,6 +42,8 @@ enum class GameStateID
 {
 	MENU,
 	PLAYING,
+	RESTART,
+	END_GAME_SCORE,
 	END_GAME,
 	GAME_OVER,
 	EXIT
@@ -51,6 +53,9 @@ enum class StatElementID
 {
 	GAME_TIME_BAR,
 	PLAYER_SCORE_BAR,
+	SUMMARY_PLAYER_SCORE,
+	SUMMARY_PLAYER_HEALTH,
+	SUMMARY_PLAYER_TOTAL_SCORE
 };
 
 enum class BuffTypeID
@@ -163,7 +168,15 @@ struct AssetSettings
 	struct COIN
 	{
 		static const std::string TEXTURE_PATH;
-		static constexpr float SCALE = 1.0f;
+		static constexpr float SCALE = 1.05f;
+		static constexpr float X_OFFSET = 10.0f;
+		static constexpr float Y_OFFSET = 10.0f;
+	};
+
+	struct SCORE
+	{
+		static const std::string TEXTURE_PATH;
+		static constexpr float SCALE = 1.05f;
 		static constexpr float X_OFFSET = 10.0f;
 		static constexpr float Y_OFFSET = 10.0f;
 	};
@@ -188,7 +201,7 @@ struct AssetSettings
 			static constexpr int HEALTH = 2;
 			static constexpr float SPEED = 100.0f;
 			static const unsigned int DAMAGE = 2;
-			static constexpr unsigned int SCORE = 1;
+			static constexpr unsigned int SCORE = 2;
 		};
 
 		struct LARGE
@@ -197,7 +210,7 @@ struct AssetSettings
 			static constexpr int HEALTH = 3;
 			static constexpr float SPEED = 150.0f;
 			static const unsigned int DAMAGE = 3;
-			static constexpr unsigned int SCORE = 1;
+			static constexpr unsigned int SCORE = 3;
 		};
 	};
 };
@@ -205,26 +218,30 @@ struct AssetSettings
 struct MenuOption
 {
 	std::string label;
-	std::unique_ptr<Text> text;
+	Text text;
 };
 
 struct MenuConfig
 {
 	static constexpr const char* TITLE = "> Earth Defender <";
+	static constexpr const char* TITLE_END_GAME_SCORE = "> SCORE <";
 	static constexpr const char* TITLE_END_GAME = "> End Game <";
 	static constexpr const char* TITLE_GAME_OVER = "> Game Over <";
-	static constexpr unsigned int TITLE_SIZE = 50;
-	static const sf::Color TITLE_COLOR;
-	static constexpr float TITLE_Y = 200.0f;
+	static constexpr unsigned int TITLE_SIZE = 42;
 
 	static constexpr const char* START_GAME = "Start Game";
 	static constexpr const char* PLAY_AGAIN = "Play Again";
+	static constexpr const char* CONFIRM = "> OK ! <";
 	static constexpr const char* EXIT = "Exit";
 	static constexpr unsigned int OPTION_SIZE = 30;
 	static const sf::Color OPTION_COLOR;
 	static const sf::Color OPTION_HIGHLIGHT_COLOR;
-	static constexpr float OPTION_Y = 300.0f;
-	static constexpr float OPTION_Y_OFFSET = 50.0f;
+};
+
+struct Container
+{
+	static constexpr unsigned int WIDTH = 600.0f;
+	static constexpr unsigned int HEIGHT = 800.0f;
 };
 
 struct TopBarHUDConfig
