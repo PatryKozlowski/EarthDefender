@@ -1,5 +1,4 @@
 #include "ui/menu/EndGameScoreHUD.hpp"
-#include "GameConfig.hpp"
 
 EndGameScoreHUD::EndGameScoreHUD(ApplicationState& applicationState, Player& player)
 	: m_ApplicationState{ applicationState },

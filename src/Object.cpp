@@ -1,5 +1,4 @@
 #include "Object.hpp"
-#include "AssetManager.hpp"
 
 Object::Object(const std::string& texturePath, float scale = 1.0f, float x = 0.0f, float y = 0.0f)
 {

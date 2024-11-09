@@ -1,5 +1,4 @@
 #include "ui/menu/MenuHUD.hpp"
-#include "GameConfig.hpp"
 
 MenuHUD::MenuHUD(ApplicationState& applicationState)
 	: m_ApplicationState{ applicationState }

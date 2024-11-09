@@ -1,6 +1,4 @@
 #include "ui/Earth.hpp"
-#include "AssetManager.hpp"
-#include "GameConfig.hpp"
 
 Earth::Earth()
 	: Object(AssetSettings::EARTH::TEXTURE_PATH, AssetSettings::EARTH::SCALE, 0.0f, 0.0f)

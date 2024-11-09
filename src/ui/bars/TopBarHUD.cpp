@@ -1,5 +1,4 @@
 #include "ui/bars/TopBarHUD.hpp"
-#include "GameConfig.hpp"
 
 TopBarHUD::TopBarHUD(sf::RenderWindow& window)
 	: m_Window{ window },

@@ -69,6 +69,9 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Earth.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Earth.cpp
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Ufo.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Ufo.cpp
+
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/icons/Score.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/icons/Score.cpp
 
@@ -111,8 +114,8 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/bars/TopBarHUD.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/bars/TopBarHUD.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/MeteorHealthHUD.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/MeteorHealthHUD.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/EnemyHealthHUD.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/EnemyHealthHUD.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/Explosion.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Explosion.cpp
@@ -125,6 +128,9 @@ add_executable(${PROJECT_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ui/EarthEntityHUD.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/EarthEntityHUD.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Boss.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Boss.cpp
     
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Meteor.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Meteor.cpp

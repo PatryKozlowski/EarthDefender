@@ -2,14 +2,16 @@
 
 #include "Object.hpp"
 #include "ui/Text.hpp"
-#include "ui/MeteorHealthHUD.hpp"
+#include "ui/EnemyHealthHUD.hpp"
 #include "ui/Explosion.hpp"
 #include "Affect.hpp"
+#include "Boss.hpp"
+#include "GameConfig.hpp"
 
 class Meteor : public Object
 {
 public:
-	Meteor(Affect& affect, const std::string& pathNmae, float speed, unsigned int health, unsigned int damage, unsigned int score);
+	Meteor(Affect& affect, Boss& boss, const std::string& pathNmae, float speed, unsigned int health, unsigned int damage, unsigned int score);
 
 	void Update(float deltaTime) override;
 	void Draw(sf::RenderWindow& window) const override;
@@ -18,7 +20,7 @@ public:
 	void Explode(bool isMeteorExplosionByPlayer);
 	bool IsDestroyed() const;
 	inline unsigned int GetHealth() const { return m_Stats.health; };
-	inline unsigned int GetDamage() const { return m_Stats.damage; };
+	unsigned int GetDamage();
 	inline unsigned int GetScore() const { return m_Stats.score; };
 	inline float GetSpeed() const { return m_Stats.speed; };
 	inline bool HasExploded() const { return m_HasExploded; };
@@ -37,12 +39,13 @@ private:
 	} m_Stats;
 
 	Affect& m_Affect;
+	Boss& m_Boss;
 
 	bool m_Destroyed;
 	bool m_HasExploded;
-	std::unique_ptr<MeteorHealthHUD> m_HealthHUD;
+	std::unique_ptr<EnemyHealthHUD> m_HealthHUD;
 	std::unique_ptr<Explosion> m_Explosion;
 
-	void SetRandomPosition();
 	void Move(float deltaTime);
+	void SetRandomPosition();
 };

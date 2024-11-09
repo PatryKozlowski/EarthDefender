@@ -4,11 +4,13 @@
 #include "Timer.hpp"
 #include "MeteorManager.hpp"
 #include "BuffManager.hpp"
-#include "ui/bars/TopBarHUD.hpp"
 #include "Affect.hpp"
+#include "ApplicationState.hpp"
+#include "Boss.hpp"
+#include "Meteor.hpp"
 #include "ui/EarthEntityHUD.hpp"
 #include "ui/menu/EndGameScoreHUD.hpp"
-#include "ApplicationState.hpp"
+#include "ui/bars/TopBarHUD.hpp"
 
 class Game
 {
@@ -25,6 +27,7 @@ private:
 	Timer m_GameTimer;
 	Timer m_MeteorsSpawnTimer;
 	Timer m_BuffsSpawnTimer;
+	Timer m_BossSpawnTimer;
 	TopBarHUD m_TopBarHUD;
 	Affect m_Affect;
 	Player m_Player;
@@ -33,6 +36,7 @@ private:
 	BuffManager m_BuffManager;
 	ApplicationState& m_ApplicationState;
 	std::unique_ptr<EndGameScoreHUD> m_EndGameScore;
+	Boss m_Boss;
 
 	void DrawTopBarHUD();
 	void DrawEarthEntityHUD();
@@ -40,6 +44,7 @@ private:
 	void StopTimers();
 	void UpdateMeteorSpawning();
 	void UpdateBuffSpawning();
+	void UpdateBossSpawning();
 	void ResetSpawners();
 	void EndGame();
 	void GameOver();

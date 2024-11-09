@@ -4,6 +4,7 @@
 #include "ui/menu/MenuHUD.hpp"
 #include "Game.hpp"
 #include "ApplicationState.hpp"
+#include "AssetManager.hpp"
 
 class Application
 {

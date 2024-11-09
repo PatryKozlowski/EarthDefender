@@ -5,6 +5,9 @@
 #include "Earth.hpp"
 #include "Affect.hpp"
 #include "Text.hpp"
+#include "GameConfig.hpp"
+#include <sstream>
+#include <iomanip>
 
 class ShieldHUD
 {

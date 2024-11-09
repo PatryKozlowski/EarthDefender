@@ -1,7 +1,11 @@
 #pragma once
 
-#include "ui/StatElement.hpp"
+#include "GameConfig.hpp"
 #include "ui/icons/Coin.hpp"
+#include "ui/icons/DoubleDamage.hpp"
+#include "ui/icons/DoubleScore.hpp"
+#include "ui/icons/ShieldBuff.hpp"
+#include "ui/icons/SlowClock.hpp"
 
 class BuffSlotBar
 {

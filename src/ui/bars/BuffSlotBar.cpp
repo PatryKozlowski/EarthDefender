@@ -1,8 +1,4 @@
 #include "ui/bars/BuffSlotBar.hpp"
-#include "ui/icons/DoubleDamage.hpp"
-#include "ui/icons/DoubleScore.hpp"
-#include "ui/icons/ShieldBuff.hpp"
-#include "ui/icons/SlowClock.hpp"
 
 BuffSlotBar::BuffSlotBar()
 {

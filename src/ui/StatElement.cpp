@@ -1,5 +1,4 @@
 #include "ui/StatElement.hpp"
-#include "GameConfig.hpp"
 
 StatElement::StatElement(std::shared_ptr<Object> icon)
 	: m_Icon{ std::move(icon) },
@@ -40,20 +39,20 @@ void StatElement::InitStatElement(StatElementID statElementID)
 
 	case StatElementID::SUMMARY_PLAYER_SCORE:
 		SetElementPosition(
-			{ 700.0f / 2,  WindowConfig::HEIGHT / 2 - 100.0f },
-			{ 700.0f / 2 + iconWidth, WindowConfig::HEIGHT / 2 - 122.0f });
+			{ (Container::WIDTH + 100) / 2,  WindowConfig::HEIGHT / 2 - 100.0f },
+			{ (Container::WIDTH + 100) / 2 + iconWidth, WindowConfig::HEIGHT / 2 - 122.0f });
 		break;
 
 	case StatElementID::SUMMARY_PLAYER_HEALTH:
 		SetElementPosition(
-			{ 700.0f / 2,  WindowConfig::HEIGHT / 2 - 50.0f },
-			{ 700.0f / 2 + iconWidth, WindowConfig::HEIGHT / 2 - 72.0f });
+			{ (Container::WIDTH + 100) / 2,  WindowConfig::HEIGHT / 2 - 50.0f },
+			{ (Container::WIDTH + 100) / 2 + iconWidth, WindowConfig::HEIGHT / 2 - 72.0f });
 		break;
 
 	case StatElementID::SUMMARY_PLAYER_TOTAL_SCORE:
 		SetElementPosition(
-			{ 700.0f / 2,  WindowConfig::HEIGHT / 2 },
-			{ 700.0f / 2 + iconWidth, WindowConfig::HEIGHT / 2 - 22.0f });
+			{ (Container::WIDTH + 100) / 2,  WindowConfig::HEIGHT / 2 },
+			{ (Container::WIDTH + 100) / 2 + iconWidth, WindowConfig::HEIGHT / 2 - 22.0f });
 		break;
 
 	default:

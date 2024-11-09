@@ -1,5 +1,4 @@
 #include "GameConfig.hpp"
-#include <vector>
 
 const sf::Color WHITE = sf::Color(255, 255, 255);
 const sf::Color MAGENTA = sf::Color(255, 0, 255);
@@ -14,9 +13,10 @@ const std::string AssetSettings::CLOCK::TEXTURE_PATH = GetResourceDir() + "clock
 const std::string AssetSettings::COIN::TEXTURE_PATH = GetResourceDir() + "coin.png";
 const std::string AssetSettings::SHIELD::TEXTURE_PATH = GetResourceDir() + "shield.png";
 const std::string AssetSettings::SCORE::TEXTURE_PATH = GetResourceDir() + "score.png";
-const std::string AssetSettings::METEOR::SMALL::TEXTURE_PATH = GetResourceDir() + "meteor_small.png";
-const std::string AssetSettings::METEOR::MEDIUM::TEXTURE_PATH = GetResourceDir() + "meteor_medium.png";
-const std::string AssetSettings::METEOR::LARGE::TEXTURE_PATH = GetResourceDir() + "meteor_large.png";
+const std::string AssetSettings::UFO::TEXTURE_PATH = GetResourceDir() + "enemys/ufo.png";
+const std::string AssetSettings::METEOR::SMALL::TEXTURE_PATH = GetResourceDir() + "enemys/meteor_small.png";
+const std::string AssetSettings::METEOR::MEDIUM::TEXTURE_PATH = GetResourceDir() + "enemys/meteor_medium.png";
+const std::string AssetSettings::METEOR::LARGE::TEXTURE_PATH = GetResourceDir() + "enemys/meteor_large.png";
 
 const std::string AssetSettings::BUFF::DOUBLE_DAMAGE::TEXTURE_PATH = GetResourceDir() + "buffs/double_damage.png";
 const std::string AssetSettings::BUFF::DOUBLE_SCORE::TEXTURE_PATH = GetResourceDir() + "buffs/double_score.png";

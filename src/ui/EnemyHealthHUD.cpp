@@ -1,19 +1,19 @@
-#include "ui/MeteorHealthHUD.hpp"
+#include "ui/EnemyHealthHUD.hpp"
 
-MeteorHealthHUD::MeteorHealthHUD()
+EnemyHealthHUD::EnemyHealthHUD()
 	: m_HealthText{ std::make_unique<Text>() },
 	m_Heart{ std::make_unique<Heart>() },
 	m_Animation{ 0.5f, 0.1f, false }
 {
 }
 
-void MeteorHealthHUD::Draw(sf::RenderWindow& window)
+void EnemyHealthHUD::Draw(sf::RenderWindow& window)
 {
 	m_Heart->Draw(window);
 	m_HealthText->Draw(window);
 }
 
-void MeteorHealthHUD::Update(float deltaTime)
+void EnemyHealthHUD::Update(float deltaTime)
 {
 	if (IsAnimating())
 	{
@@ -29,12 +29,12 @@ void MeteorHealthHUD::Update(float deltaTime)
 	}
 }
 
-void MeteorHealthHUD::UpdateHealthText(const unsigned int& health)
+void EnemyHealthHUD::UpdateHealthText(const unsigned int& health)
 {
 	m_HealthText->SetText(std::to_string(health));
 }
 
-void MeteorHealthHUD::InitMeteorHealthHUD(sf::Vector2f position, const unsigned int& health)
+void EnemyHealthHUD::InitMeteorHealthHUD(sf::Vector2f position, const unsigned int& health)
 {
 	m_Heart->SetObjectPosition(position.x, position.y - 15);
 	m_Heart->SetObjectScale(GetScaleFactor(), GetScaleFactor());
@@ -44,10 +44,9 @@ void MeteorHealthHUD::InitMeteorHealthHUD(sf::Vector2f position, const unsigned 
 	m_HealthText->SetText(std::to_string(health));
 	m_HealthText->SetPosition(sf::Vector2f(position.x + heartIconWidth + 5, position.y - 16));
 	m_HealthText->SetSize(16);
-	m_HealthText->SetColor(sf::Color::White);
 }
 
-void MeteorHealthHUD::StartAnimation()
+void EnemyHealthHUD::StartAnimation()
 {
 	SetIsAnimating(true);
 	SetAnimationSpeed(0.1f);

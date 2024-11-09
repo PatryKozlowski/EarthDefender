@@ -1,6 +1,4 @@
 #include "ui/Explosion.hpp"
-#include "AssetManager.hpp"
-#include "GameConfig.hpp"
 
 Explosion::Explosion(bool isExplosionByPlayer)
 	: Object(AssetSettings::EXPLOSION::TEXTURE_PATH, AssetSettings::EXPLOSION::SCALE, 0.0f, 0.0f),

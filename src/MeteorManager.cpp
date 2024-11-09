@@ -1,10 +1,11 @@
 #include "MeteorManager.hpp"
 
-MeteorManager::MeteorManager(sf::RenderWindow& window, Player& player, Affect& affect, EarthEntityHUD& earthEntity)
+MeteorManager::MeteorManager(sf::RenderWindow& window, Player& player, Affect& affect, EarthEntityHUD& earthEntity, Boss& boss)
 	: m_Window{ window },
 	m_Player{ player },
 	m_Affect{ affect },
-	m_EarthEntity{ earthEntity }
+	m_EarthEntity{ earthEntity },
+	m_Boss{ boss }
 {
 }
 
@@ -17,7 +18,14 @@ void MeteorManager::SpawnMeteor()
 
 	const MeteorData& randomMeteorData = m_MeteorTypes[static_cast<size_t>(rand() % static_cast<int>(m_MeteorTypes.size()))];
 
-	m_Meteors.emplace_back(std::make_unique<Meteor>(m_Affect, randomMeteorData.texturePath, randomMeteorData.speed, randomMeteorData.health, randomMeteorData.damage, randomMeteorData.score));
+	m_Meteors.emplace_back(std::make_unique<Meteor>(m_Affect,
+		m_Boss,
+		randomMeteorData.texturePath,
+		randomMeteorData.speed,
+		randomMeteorData.health,
+		randomMeteorData.damage,
+		randomMeteorData.score)
+	);
 }
 
 void MeteorManager::Update(float deltaTime)

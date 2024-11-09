@@ -1,14 +1,14 @@
 #include "Meteor.hpp"
-#include "GameConfig.hpp"
 
-Meteor::Meteor(Affect& affect, const std::string& pathName, float speed, unsigned int health, unsigned int damage, unsigned int score)
+Meteor::Meteor(Affect& affect, Boss& boss, const std::string& pathName, float speed, unsigned int health, unsigned int damage, unsigned int score)
 	: Object(pathName, AssetSettings::METEOR::SCALE, 0.0f, 0.0f),
 	m_Affect{ affect },
 	m_Stats{ speed, health, damage, score },
 	m_Destroyed{ false },
-	m_HealthHUD{ std::make_unique<MeteorHealthHUD>() },
+	m_HealthHUD{ std::make_unique<EnemyHealthHUD>() },
 	m_Explosion{ nullptr },
-	m_HasExploded{ false }
+	m_HasExploded{ false },
+	m_Boss{ boss }
 {
 	SetRandomPosition();
 }
@@ -59,6 +59,11 @@ void Meteor::SetRandomPosition()
 
 	float yPosition = (TopBarHUDConfig::BACKGROUND_Y_OFFSET + 5.0f);
 
+	if (m_Boss.GetIsSpawned())
+	{
+		yPosition += m_Boss.GetBossBound().height;
+	}
+
 	SetObjectPosition(static_cast<float>(xPosition), yPosition);
 }
 
@@ -70,6 +75,10 @@ void Meteor::Move(float deltaTime)
 	if (m_Affect.IsSlowBuff())
 	{
 		positionY += GetSpeed() * deltaTime * AssetSettings::BUFF::SLOW_METEOR_SPEED::SPEED_MULTIPLIER;
+	}
+	else if (m_Affect.IsMeteorEnhancemen())
+	{
+		positionY += GetSpeed() * deltaTime * AssetSettings::BUFF::METEOR_ENHANCEMENT::SPEED_MULTIPLIER;
 	}
 	else
 	{
@@ -139,4 +148,16 @@ bool Meteor::IsDestroyed() const
 	}
 
 	return meteorOutSideWindow || GetDestroyedFlag();
+}
+
+unsigned int Meteor::GetDamage()
+{
+	if (m_Affect.IsMeteorEnhancemen())
+	{
+		return m_Stats.damage += 1;
+	}
+	else
+	{
+		return m_Stats.damage;
+	}
 }

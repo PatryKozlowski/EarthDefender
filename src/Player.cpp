@@ -1,5 +1,4 @@
 #include "Player.hpp"
-#include "GameConfig.hpp"
 
 Player::Player(Affect& affect)
 	: m_Stats{ GameConfig::INIT_HEALTH, GameConfig::INIT_SCORE, GameConfig::INIT_PLAYER_DMG },

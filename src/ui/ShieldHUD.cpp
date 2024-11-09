@@ -1,9 +1,5 @@
 #include "ui/ShieldHUD.hpp"
 
-#include "GameConfig.hpp"
-#include <sstream>
-#include <iomanip>
-
 ShieldHUD::ShieldHUD(Earth& earth, Affect& affect)
 	: m_Shield{ std::make_unique<Shield>() },
 	m_Earth{ earth },

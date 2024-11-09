@@ -7,6 +7,7 @@
 #include "ui/icons/Coin.hpp"
 #include "ui/icons/Score.hpp"
 #include "ui/icons/Heart.hpp"
+#include "GameConfig.hpp"
 
 class EndGameScoreHUD
 {

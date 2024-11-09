@@ -1,5 +1,4 @@
 #include "ui/Text.hpp"
-#include "AssetManager.hpp"
 #include "GameConfig.hpp"
 
 Text::Text()

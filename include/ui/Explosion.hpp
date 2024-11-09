@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Object.hpp"
+#include "AssetManager.hpp"
+#include "GameConfig.hpp"
 
 class Explosion : public Object
 {

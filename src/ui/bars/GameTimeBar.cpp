@@ -1,7 +1,4 @@
 #include "ui/bars/GameTimeBar.hpp"
-#include "ui/icons/Clock.hpp"
-#include "AssetManager.hpp"
-#include "GameConfig.hpp"
 
 GameTimeBar::GameTimeBar()
 	: StatElement(std::make_shared<Clock>()),

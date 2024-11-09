@@ -4,10 +4,10 @@
 #include "AssetManager.hpp"
 #include "GameConfig.hpp"
 
-class Earth : public Object
+class Ufo : public Object
 {
 public:
-	Earth();
+	Ufo();
 	void Draw(sf::RenderWindow& window) const;
 
 

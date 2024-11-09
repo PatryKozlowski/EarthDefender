@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ui/StatElement.hpp"
+#include "ui/icons/Clock.hpp"
+#include "AssetManager.hpp"
+#include "GameConfig.hpp"
 
 class GameTimeBar : public StatElement
 {

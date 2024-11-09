@@ -3,10 +3,10 @@
 #include "Text.hpp"
 #include "ui/icons/Heart.hpp"
 
-class MeteorHealthHUD
+class EnemyHealthHUD
 {
 public:
-	MeteorHealthHUD();
+	EnemyHealthHUD();
 	void Draw(sf::RenderWindow& window);
 	void Update(float deltaTime);
 	void UpdateHealthText(const unsigned int& health);

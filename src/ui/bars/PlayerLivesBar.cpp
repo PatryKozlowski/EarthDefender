@@ -1,5 +1,4 @@
 #include "ui/bars/PlayerLivesBar.hpp"
-#include "GameConfig.hpp"
 
 PlayerLivesBar::PlayerLivesBar()
 	: m_Animation{ 1.0f, 0.1f, false }

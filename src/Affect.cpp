@@ -1,5 +1,4 @@
 #include "Affect.hpp"
-#include "GameConfig.hpp"
 
 void Affect::ApplyEffect(const BuffTypeID& buffType)
 {
@@ -19,6 +18,10 @@ void Affect::ApplyEffect(const BuffTypeID& buffType)
 
 	case BuffTypeID::SLOW_METEOR_SPEED:
 		SetSlowBuff(true);
+		break;
+
+	case BuffTypeID::BOSS_METEOR_ENHANCEMENT:
+		SetMeteorEnhancement(true);
 		break;
 
 	default:
@@ -44,7 +47,10 @@ void Affect::RemoveEffect(const BuffTypeID& buffType)
 
 	case BuffTypeID::SLOW_METEOR_SPEED:
 		SetSlowBuff(false);
+		break;
 
+	case BuffTypeID::BOSS_METEOR_ENHANCEMENT:
+		SetMeteorEnhancement(false);
 		break;
 
 	default:
@@ -69,6 +75,10 @@ BuffTypeID Affect::GetActiveAffect() const
 	else if (IsSlowBuff())
 	{
 		return BuffTypeID::SLOW_METEOR_SPEED;
+	}
+	else if (IsMeteorEnhancemen())
+	{
+		return BuffTypeID::BOSS_METEOR_ENHANCEMENT;
 	}
 
 	return BuffTypeID::NONE;

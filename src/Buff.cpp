@@ -1,5 +1,4 @@
 #include "Buff.hpp"
-#include "GameConfig.hpp"
 
 Buff::Buff(const std::string& pathName, BuffTypeID type, float duration)
 	: Object(pathName, AssetSettings::BUFF::SCALE, 0.0f, 0.0f),

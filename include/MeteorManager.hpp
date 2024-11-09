@@ -5,11 +5,12 @@
 #include "Player.hpp"
 #include "GameConfig.hpp"
 #include "ui/EarthEntityHUD.hpp"
+#include "Boss.hpp"
 
 class MeteorManager
 {
 public:
-	MeteorManager(sf::RenderWindow& window, Player& m_Player, Affect& affect, EarthEntityHUD& earthEntity);
+	MeteorManager(sf::RenderWindow& window, Player& m_Player, Affect& affect, EarthEntityHUD& earthEntity, Boss& boss);
 	void SpawnMeteor();
 	void Update(float deltaTime);
 	void DrawMeteors(sf::RenderWindow& window) const;
@@ -28,6 +29,7 @@ private:
 	Player& m_Player;
 	Affect& m_Affect;
 	EarthEntityHUD& m_EarthEntity;
+	Boss& m_Boss;
 
 	bool IsCollision(const Meteor& meteor, const Earth& earth);
 };
