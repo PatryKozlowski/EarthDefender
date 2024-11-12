@@ -8,6 +8,14 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     message(STATUS "Building on macOS")
     set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -Wall -Wextra -Wpedantic -Wconversion -Werror -fno-omit-frame-pointer")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Wextra -Wpedantic -Wconversion -Werror -march=native -flto")
+elseif(MSVC)
+    message(STATUS "Building on Windows (MSVC)")
+    set(CMAKE_CXX_FLAGS_DEBUG "/Zi /Od")
+    set(CMAKE_CXX_FLAGS_RELEASE "/O2 /DNDEBUG")
+elseif(WIN32)
+    message(STATUS "Building on Windows")
+    set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 endif()
 
 set(CMAKE_CXX_STANDARD 20)
@@ -152,13 +160,15 @@ add_executable(${PROJECT_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/ApplicationState.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ApplicationState.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/resources.rc
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE sfml-graphics)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE sfml-graphics sfml-main)
 
 set(RESOURCE_FOLDER_NAME "assets")
 set(RESOURCE_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${RESOURCE_FOLDER_NAME}")
@@ -176,3 +186,9 @@ configure_file(
 	"config.hpp.in"
 	"${CMAKE_CURRENT_SOURCE_DIR}/include/ConfigAssetPath.hpp" ESCAPE_QUOTES
 )
+
+if (CMAKE_BUILD_TYPE STREQUAL "Release")
+    set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
+else()
+    set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE FALSE)
+endif()

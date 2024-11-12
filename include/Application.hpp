@@ -21,7 +21,9 @@ private:
 	ApplicationState m_ApplicationState;
 	std::unique_ptr<MenuHUD> m_Menu;
 	Game m_Game;
+	sf::Image m_Icon;
 
 	void HandleEvent(const sf::Event& event);
 	void UpdateGameStates();
+	void SetIcon();
 };

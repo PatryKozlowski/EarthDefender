@@ -1,73 +1,73 @@
 #include "AssetManager.hpp"
 
-AssetManager &AssetManager::GetInstance()
+AssetManager& AssetManager::GetInstance()
 {
-    static AssetManager instance;
-    return instance;
+	static AssetManager instance;
+	return instance;
 }
 
-const sf::Texture &AssetManager::LoadTexture(const std::string &pathName)
+const sf::Texture& AssetManager::LoadTexture(const std::string& pathName)
 {
-    const auto it = m_Textures.find(pathName);
+	const auto it = m_Textures.find(pathName);
 
-    if (it != m_Textures.end())
-    {
-        return *it->second;
-    }
+	if (it != m_Textures.end())
+	{
+		return *it->second;
+	}
 
-    auto texture = std::make_unique<sf::Texture>();
+	auto texture = std::make_unique<sf::Texture>();
 
-    if (!texture->loadFromFile(pathName))
-    {
-        throw std::runtime_error("Failed to load texture: " + pathName);
-    }
+	if (!texture->loadFromFile(pathName))
+	{
+		throw std::runtime_error("Failed to load texture: " + pathName);
+	}
 
-    m_Textures[pathName] = std::move(texture);
+	m_Textures[pathName] = std::move(texture);
 
-    return *m_Textures[pathName];
+	return *m_Textures[pathName];
 }
 
-const sf::Texture &AssetManager::GetTexture(const std::string &pathName) const
+const sf::Texture& AssetManager::GetTexture(const std::string& pathName) const
 {
-    const auto it = m_Textures.find(pathName);
+	const auto it = m_Textures.find(pathName);
 
-    if (it == m_Textures.end())
-    {
-        throw std::runtime_error("Texture not found: " + pathName);
-    }
+	if (it == m_Textures.end())
+	{
+		throw std::runtime_error("Texture not found: " + pathName);
+	}
 
-    return *it->second;
+	return *it->second;
 }
 
-const sf::Font &AssetManager::LoadFont(const std::string &pathName)
+const sf::Font& AssetManager::LoadFont(const std::string& pathName)
 {
-    const auto it = m_Fonts.find(pathName);
+	const auto it = m_Fonts.find(pathName);
 
-    if (it != m_Fonts.end())
-    {
-        return *it->second;
-    }
+	if (it != m_Fonts.end())
+	{
+		return *it->second;
+	}
 
-    auto font = std::make_unique<sf::Font>();
+	auto font = std::make_unique<sf::Font>();
 
-    if (!font->loadFromFile(pathName))
-    {
-        throw std::runtime_error("Failed to load font: " + pathName);
-    }
+	if (!font->loadFromFile(pathName))
+	{
+		throw std::runtime_error("Failed to load font: " + pathName);
+	}
 
-    m_Fonts[pathName] = std::move(font);
+	m_Fonts[pathName] = std::move(font);
 
-    return *m_Fonts[pathName];
+	return *m_Fonts[pathName];
 }
 
-const sf::Font &AssetManager::GetFont(const std::string &pathName) const
+const sf::Font& AssetManager::GetFont(const std::string& pathName) const
 {
-    const auto it = m_Fonts.find(pathName);
+	const auto it = m_Fonts.find(pathName);
 
-    if (it == m_Fonts.end())
-    {
-        throw std::runtime_error("Font not found: " + pathName);
-    }
+	if (it == m_Fonts.end())
+	{
+		throw std::runtime_error("Font not found: " + pathName);
+	}
 
-    return *it->second;
+	return *it->second;
 }

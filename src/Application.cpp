@@ -10,6 +10,7 @@ Application::Application(const unsigned int width, const unsigned int height, co
 
 void Application::Run()
 {
+	SetIcon();
 	m_Clock.restart();
 	float accumulatorTime = 0.0f;
 	const float timeStep = 1.0f / m_TargetFps;
@@ -91,5 +92,19 @@ void Application::UpdateGameStates()
 
 	default:
 		break;
+	}
+}
+
+void Application::SetIcon()
+{
+	const std::string pathName = WindowConfig::TEXTURE_PATH;
+
+	if (m_Icon.loadFromFile(pathName))
+	{
+		m_Window.setIcon(m_Icon.getSize().x, m_Icon.getSize().y, m_Icon.getPixelsPtr());
+	}
+	else
+	{
+		throw std::runtime_error("Failed to load texture: " + pathName);
 	}
 }

@@ -12,6 +12,7 @@ struct WindowConfig
 	static constexpr const char* TITLE = "Earth Defender";
 	static constexpr sf::Uint32 STYLE = sf::Style::Titlebar | sf::Style::Close;
 	static constexpr float TARGET_FPS = 60.0f;
+	static const std::string TEXTURE_PATH;
 };
 
 struct GameConfig
