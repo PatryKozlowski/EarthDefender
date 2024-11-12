@@ -4,7 +4,7 @@ Earth Defender is a simple video game written in C++ using SFML library.
 The goal of the game is to defend the Earth from falling meteors.
 The player must click on meteors to destroy them before they hit the Earth. 
 
-![Demo Gif](https://i.imgur.com/eREA5dv.gif)
+![Demo Gif](assets/demo/earthdefender.gif)
 
 ## Table of Contents
   - [Description](#description)
