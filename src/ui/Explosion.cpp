@@ -36,13 +36,6 @@ void Explosion::Update(float deltaTime)
 	}
 }
 
-
-void Explosion::Draw(sf::RenderWindow& window) const
-{
-	Object::Draw(window);
-}
-
-
 void Explosion::UpdateTextureRect()
 {
 	int x = GetCurrentFrame() * AssetSettings::EXPLOSION::FRAME_WIDTH;

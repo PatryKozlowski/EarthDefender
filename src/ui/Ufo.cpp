@@ -10,8 +10,3 @@ Ufo::Ufo()
 
 	m_Radius = GetObjectRadius();
 }
-
-void Ufo::Draw(sf::RenderWindow& window) const
-{
-	Object::Draw(window);
-}

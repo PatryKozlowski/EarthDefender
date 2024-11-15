@@ -10,7 +10,6 @@ public:
 	Explosion(bool isMeteorExplosionByPlayer);
 
 	void Update(float deltaTime) override;
-	void Draw(sf::RenderWindow& window) const override;
 	inline void SetFinished(bool isFinished) { m_Animation.isFinished = isFinished; };
 	inline void SetExplosionByPlayer(bool isExplosionByPlayer) { m_IsExplosionByPlayer = isExplosionByPlayer; };
 	inline void SetCurrentFrame(unsigned int currentFrame) { m_Animation.currentFrame = currentFrame; };

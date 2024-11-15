@@ -8,8 +8,6 @@ class Ufo : public Object
 {
 public:
 	Ufo();
-	void Draw(sf::RenderWindow& window) const;
-
 
 private:
 	float m_Radius;

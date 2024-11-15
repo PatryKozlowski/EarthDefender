@@ -10,8 +10,3 @@ Earth::Earth()
 
 	m_Radius = GetObjectRadius();
 }
-
-void Earth::Draw(sf::RenderWindow& window) const
-{
-	Object::Draw(window);
-}
