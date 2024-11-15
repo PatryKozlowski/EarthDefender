@@ -14,60 +14,66 @@ Boss::Boss(Player& player, Affect& affect)
 
 void Boss::SpawnBoss(sf::RenderWindow& window)
 {
-	if (GetIsSpawned())
+	if (!GetIsSpawned())
 	{
-		if (m_Explosion)
-		{
-			m_Explosion->Draw(window);
-		}
-		else
-		{
-			m_Ufo.Draw(window);
-			m_Affect.ApplyEffect(BuffTypeID::BOSS_METEOR_ENHANCEMENT);
-		}
+		return;
+	}
 
-		if (!HasExploded())
-		{
-			m_HealthHUD->InitMeteorHealthHUD(m_Ufo.GetObjectPosition(), GetHealth());
+	if (m_Explosion)
+	{
+		m_Explosion->Draw(window);
+	}
+	else
+	{
+		m_Ufo.Draw(window);
+		m_Affect.ApplyEffect(BuffTypeID::BOSS_METEOR_ENHANCEMENT);
+	}
 
-			m_HealthHUD->Draw(window);
-		}
+	if (!HasExploded())
+	{
+		m_HealthHUD->InitMeteorHealthHUD(m_Ufo.GetObjectPosition(), GetHealth());
+
+		m_HealthHUD->Draw(window);
 	}
 }
 
 void Boss::HandleClick(const sf::Event& event)
 {
-	if (GetIsSpawned())
+	if (!GetIsSpawned())
 	{
-		if (m_Ufo.IsClicked(event) && !HasExploded())
-		{
-			Hit(m_Player.GetDamage());
-		}
+		return;
 	}
+
+	if (m_Ufo.IsClicked(event) && !HasExploded())
+	{
+		Hit(m_Player.GetDamage());
+	}
+
 }
 
 void Boss::Update(float deltaTime)
 {
-	if (GetIsSpawned())
+	if (!GetIsSpawned())
 	{
-		if (m_Explosion)
+		return;
+	}
+
+	if (m_Explosion)
+	{
+		m_Explosion->Update(deltaTime);
+
+		if (m_Explosion->IsFinished())
 		{
-			m_Explosion->Update(deltaTime);
-
-			if (m_Explosion->IsFinished())
-			{
-				SetIsSpawned(false);
-				SetShouldAppear(false);
-				m_Affect.RemoveEffect(BuffTypeID::BOSS_METEOR_ENHANCEMENT);
-				m_Explosion.reset();
-			}
+			SetIsSpawned(false);
+			SetShouldAppear(false);
+			m_Affect.RemoveEffect(BuffTypeID::BOSS_METEOR_ENHANCEMENT);
+			m_Explosion.reset();
 		}
+	}
 
-		if (!HasExploded() && GetIsSpawned())
-		{
-			m_HealthHUD->Update(deltaTime);
-		}
-
+	if (!HasExploded())
+	{
+		m_HealthHUD->Update(deltaTime);
 	}
 }
 
